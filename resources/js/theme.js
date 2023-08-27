@@ -23,6 +23,8 @@ const theme = createTheme({
                 root: {
                     backgroundColor: "#f4f4f4",
                     borderRadius: "30px",
+                    border: "none",
+                    "& fieldset": { border: "none" },
                 },
             },
         },
