@@ -13,6 +13,9 @@ use Inertia\Inertia;
 
 
 Route::get('/', [PageController::class, 'index'])->name('home');
+Route::get('/login' , [PageController::class, 'showLogin'])->name('showLogin');
+Route::get('/register' , [PageController::class, 'showRegister'])->name('showRegister');
+Route::post('/register' , [UserController::class, 'createUser'])->name('createUser');
 Route::get('/product-detail', [ProductController::class, 'productDetail'])->name('productDetail');
 
 // These routes are middleware protected

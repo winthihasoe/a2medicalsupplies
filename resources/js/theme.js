@@ -32,7 +32,7 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     textTransform: "none", // Reset text to original case
-                    borderRadius: 10,
+                    borderRadius: 20,
                 },
             },
         },

@@ -15,6 +15,18 @@ class PageController extends Controller
         ]);
     }
 
+    // Show login Form 
+    public function showLogin()
+    {
+        return Inertia::render('Auth/Login');
+    }
+
+    // Show register Form 
+    public function showRegister()
+    {
+        return Inertia::render('Auth/Register');
+    }
+
    public function dashboard()
    {
     return Inertia::render('Admin/Dashboard');
