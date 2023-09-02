@@ -1,11 +1,13 @@
 import React from "react";
 import AdminLayout from "../../layouts/AdminLayout";
-import { Box, Container, Typography } from "@mui/material";
-import { InertiaLink } from "@inertiajs/inertia-react";
+import { Box, Container, Divider, Typography } from "@mui/material";
+import { Head, Link } from "@inertiajs/react";
 
-export default function AdminProducts() {
+export default function AdminProducts(props) {
+    const products = props.products;
     return (
         <AdminLayout heading={"Products"}>
+            <Head title="Product list" />
             <Container>
                 <Box
                     sx={{
@@ -16,40 +18,33 @@ export default function AdminProducts() {
                         minHeight: "80vh",
                     }}
                 >
-                    <Box
-                        sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                            p: 2,
-                            my: 2,
-                            backgroundColor: "#efefef",
-                            borderRadius: 4,
-                        }}
-                    >
-                        <Typography fontSize={14} fontWeight={600}>
-                            Nursing Manikin
-                        </Typography>
-                        <InertiaLink href="/admin/single-product">
-                            See detail
-                        </InertiaLink>
-                    </Box>
-                    <Box
-                        sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                            p: 2,
-                            my: 2,
-                            backgroundColor: "#efefef",
-                            borderRadius: 4,
-                        }}
-                    >
-                        <Typography fontSize={14} fontWeight={600}>
-                            Microscope
-                        </Typography>
-                        <InertiaLink>See detail</InertiaLink>
-                    </Box>
+                    <Typography fontSize={20} mb={1}>
+                        Product list
+                    </Typography>
+                    <Divider />
+                    {products.map((product, i) => (
+                        <Box
+                            sx={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                                p: 2,
+                                my: 2,
+                                backgroundColor: "#efefef",
+                                borderRadius: 4,
+                            }}
+                        >
+                            <Typography fontSize={14} fontWeight={600}>
+                                {i + 1}
+                                {". "} {product.product_name}
+                            </Typography>
+                            <Link
+                                href={route("adminSingleProduct", product.id)}
+                            >
+                                See detail
+                            </Link>
+                        </Box>
+                    ))}
                 </Box>
             </Container>
         </AdminLayout>

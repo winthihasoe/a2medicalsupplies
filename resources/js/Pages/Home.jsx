@@ -3,10 +3,12 @@ import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
 import UserLayout from "../layouts/UserLayout";
 import Footer from "../components/Footer";
+import { Head } from "@inertiajs/react";
 
 export default function Home({ description }) {
     return (
         <UserLayout>
+            <Head title="Home" />
             <Box my={3}>
                 <Grid container columnSpacing={1.5}>
                     <Grid item>

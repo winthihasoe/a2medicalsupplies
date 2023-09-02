@@ -13,9 +13,10 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import FormatAlignLeftRoundedIcon from "@mui/icons-material/FormatAlignLeftRounded";
-import { InertiaLink } from "@inertiajs/inertia-react";
+import { Link, usePage } from "@inertiajs/react";
 
 export default function AppBar() {
+    const user = usePage().props.auth;
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
@@ -33,14 +34,6 @@ export default function AppBar() {
             Title: "Account",
             Link: "/account",
         },
-        {
-            Title: "Dashboard",
-            Link: "/dashboard",
-        },
-        {
-            Title: "Logout",
-            Link: "/logout",
-        },
     ];
     return (
         <Box>
@@ -57,9 +50,9 @@ export default function AppBar() {
                 }}
             >
                 <Typography color="primary" fontSize={22} fontWeight={700}>
-                    <InertiaLink className="inertia-link" href="/">
+                    <Link className="inertia-link" href={route("home")}>
                         A2 Medical Supplies
-                    </InertiaLink>
+                    </Link>
                 </Typography>
 
                 <IconButton onClick={toggleSidebar} sx={{ zIndex: 1 }}>
@@ -71,53 +64,39 @@ export default function AppBar() {
                     onClose={toggleSidebar}
                     sx={{ width: "60%" }}
                 >
-                    <Box
-                        sx={{
-                            width: 220, // Adjust this value as needed
-                        }}
-                    >
+                    {user.user !== null ? (
                         <Box
                             sx={{
-                                backgroundColor: "#ba7636",
-                                p: 2,
-                                mb: 4,
+                                width: 220, // Adjust this value as needed
                             }}
                         >
-                            <Typography
-                                fontSize={22}
-                                fontWeight={300}
-                                align="center"
-                                color="white"
-                                letterSpacing={2}
+                            <Box
+                                sx={{
+                                    backgroundColor: "#ba7636",
+                                    p: 2,
+                                    mb: 4,
+                                }}
                             >
-                                Menu
-                            </Typography>
-                        </Box>
+                                <Typography
+                                    fontSize={22}
+                                    fontWeight={300}
+                                    align="center"
+                                    color="white"
+                                    letterSpacing={2}
+                                >
+                                    Menu
+                                </Typography>
+                            </Box>
 
-                        {/* MenuList start here  */}
-                        <List>
-                            {MenuList.map((Menu) => (
-                                <ListItem>
-                                    <InertiaLink
-                                        href={Menu.Link}
-                                        className="inertia-link"
-                                    >
-                                        {Menu.Title == "Logout" && <Divider />}
-                                        {Menu.Title == "Logout" ? (
-                                            <Box
-                                                sx={{
-                                                    backgroundColor: "red",
-                                                    width: 140,
-                                                    p: 2,
-                                                    mt: 1,
-                                                    borderRadius: 3,
-                                                }}
-                                            >
-                                                <Typography color="white">
-                                                    {Menu.Title}
-                                                </Typography>
-                                            </Box>
-                                        ) : (
+                            {/* MenuList start here  */}
+                            <List>
+                                {MenuList.map((Menu) => (
+                                    <ListItem key={Menu.Title}>
+                                        <Link
+                                            href={Menu.Link}
+                                            className="inertia-link"
+                                            as="div"
+                                        >
                                             <Box
                                                 sx={{
                                                     backgroundColor: "#efefef",
@@ -131,12 +110,119 @@ export default function AppBar() {
                                                     {Menu.Title}
                                                 </Typography>
                                             </Box>
-                                        )}
-                                    </InertiaLink>
+                                        </Link>
+                                    </ListItem>
+                                ))}
+                                {user.user.is_admin == 1 && (
+                                    <ListItem>
+                                        <Link
+                                            className="inertia-link"
+                                            href={route("dashboard")}
+                                            as="div"
+                                        >
+                                            <Box
+                                                sx={{
+                                                    backgroundColor: "grey",
+                                                    width: 140,
+                                                    p: 2,
+                                                    mt: 1,
+                                                    borderRadius: 3,
+                                                }}
+                                            >
+                                                <Typography color="white">
+                                                    Dashboard
+                                                </Typography>
+                                            </Box>
+                                        </Link>
+                                    </ListItem>
+                                )}
+                                <ListItem>
+                                    <Link
+                                        className="inertia-link"
+                                        href={route("logout")}
+                                        method="post"
+                                        as="div"
+                                    >
+                                        <Box
+                                            sx={{
+                                                backgroundColor: "red",
+                                                width: 140,
+                                                p: 2,
+                                                mt: 1,
+                                                borderRadius: 3,
+                                            }}
+                                        >
+                                            <Typography color="white">
+                                                Logout
+                                            </Typography>
+                                        </Box>
+                                    </Link>
                                 </ListItem>
-                            ))}
-                        </List>
-                    </Box>
+                            </List>
+                        </Box>
+                    ) : (
+                        <Box
+                            sx={{
+                                width: 220, // Adjust this value as needed
+                            }}
+                        >
+                            <Box
+                                sx={{
+                                    backgroundColor: "#ba7636",
+                                    p: 2,
+                                    mb: 4,
+                                }}
+                            >
+                                <Typography
+                                    fontSize={22}
+                                    fontWeight={300}
+                                    align="center"
+                                    color="white"
+                                    letterSpacing={2}
+                                >
+                                    Welcome
+                                </Typography>
+                            </Box>
+                            <List>
+                                <ListItem>
+                                    <Link
+                                        className="inertia-link"
+                                        href={route("login")}
+                                    >
+                                        <Box
+                                            sx={{
+                                                backgroundColor: "#efefef",
+                                                width: 140,
+                                                p: 2,
+                                                mt: 1,
+                                                borderRadius: 3,
+                                            }}
+                                        >
+                                            <Typography>Login</Typography>
+                                        </Box>
+                                    </Link>
+                                </ListItem>
+                                <ListItem>
+                                    <Link
+                                        className="inertia-link"
+                                        href={route("register")}
+                                    >
+                                        <Box
+                                            sx={{
+                                                backgroundColor: "#efefef",
+                                                width: 140,
+                                                p: 2,
+                                                mt: 1,
+                                                borderRadius: 3,
+                                            }}
+                                        >
+                                            <Typography>Register</Typography>
+                                        </Box>
+                                    </Link>
+                                </ListItem>
+                            </List>
+                        </Box>
+                    )}
                 </Drawer>
                 <Box
                     sx={{

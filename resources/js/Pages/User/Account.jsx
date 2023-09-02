@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Divider, Typography } from "@mui/material";
-import { Head, InertiaLink } from "@inertiajs/inertia-react";
 import AccountLayout from "../../layouts/AccountLayout";
+import { Head, Link } from "@inertiajs/react";
 
 export default function Account() {
     const AccountMenus = [
@@ -44,9 +44,7 @@ export default function Account() {
                             <Typography fontSize={22} fontWeight={700}>
                                 {Menu.Title}
                             </Typography>
-                            <InertiaLink href={Menu.Link}>
-                                {Menu.Button}
-                            </InertiaLink>
+                            <Link href={Menu.Link}>{Menu.Button}</Link>
                         </Box>
                         <Divider />
                     </Box>

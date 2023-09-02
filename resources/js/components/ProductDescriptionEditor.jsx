@@ -3,7 +3,7 @@ import "react-quill/dist/quill.snow.css"; // Import Quill styles
 import { ChromePicker } from "react-color"; // Import the color picker
 import { useEffect, useState } from "react";
 
-function ProductDescriptionEditor({ value, onChange }) {
+function ProductDescriptionEditor({ initialValue, handleChangeDescription }) {
     const modules = {
         toolbar: [
             [{ header: [1, 2, false] }],
@@ -15,7 +15,7 @@ function ProductDescriptionEditor({ value, onChange }) {
                 { indent: "-1" },
                 { indent: "+1" },
             ],
-            ["link", "image"],
+            ["image"],
         ],
     };
 
@@ -35,10 +35,10 @@ function ProductDescriptionEditor({ value, onChange }) {
     ];
 
     return (
-        <div>
+        <div style={{ minHeight: "200px" }}>
             <ReactQuill
-                value={value}
-                onChange={onChange}
+                value={initialValue}
+                onChange={handleChangeDescription}
                 theme="snow"
                 modules={modules}
                 formats={formats}

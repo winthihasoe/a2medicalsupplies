@@ -9,7 +9,7 @@ import {
     Typography,
 } from "@mui/material";
 import BackButton from "../../components/BackButton";
-import { Head } from "@inertiajs/inertia-react";
+import { Head } from "@inertiajs/react";
 
 export default function Profile() {
     return (

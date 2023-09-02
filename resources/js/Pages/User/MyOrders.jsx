@@ -2,7 +2,7 @@ import React from "react";
 import AccountLayout from "../../layouts/AccountLayout";
 import { Box, Container, Divider, Typography } from "@mui/material";
 import BackButton from "../../components/BackButton";
-import { Head, InertiaLink } from "@inertiajs/inertia-react";
+import { Head, Link } from "@inertiajs/react";
 
 export default function MyOrders() {
     return (
@@ -37,7 +37,7 @@ export default function MyOrders() {
                         <Typography fontSize={14} fontWeight={600}>
                             Inv-1234567890
                         </Typography>
-                        <InertiaLink href="/my-single-order">view</InertiaLink>
+                        <Link href="/my-single-order">view</Link>
                     </Box>
                     <Box
                         sx={{
@@ -53,7 +53,7 @@ export default function MyOrders() {
                         <Typography fontSize={14} fontWeight={600}>
                             Inv-1234567890
                         </Typography>
-                        <InertiaLink>view</InertiaLink>
+                        <Link>view</Link>
                     </Box>
                 </Box>
             </Container>

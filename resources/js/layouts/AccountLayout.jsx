@@ -12,7 +12,7 @@ export default function AccountLayout({ children }) {
             }}
         >
             <AppBar />
-            <Container component="main" flexGrow={1} maxWidth="xs">
+            <Container component="main" maxWidth="xs">
                 {children}
             </Container>
         </Box>

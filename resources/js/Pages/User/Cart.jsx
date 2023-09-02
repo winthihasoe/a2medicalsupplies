@@ -2,7 +2,7 @@ import React from "react";
 import UserLayout from "../../layouts/UserLayout";
 import { Box, Button, Typography } from "@mui/material";
 import CartItemCard from "../../components/CartItemCard";
-import { Head } from "@inertiajs/inertia-react";
+import { Head } from "@inertiajs/react";
 
 export default function Cart() {
     return (

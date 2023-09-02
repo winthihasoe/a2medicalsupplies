@@ -1,8 +1,8 @@
 import React from "react";
 import AccountLayout from "../../layouts/AccountLayout";
-import { Head } from "@inertiajs/inertia-react";
 import { Box, Button, Divider, TextField, Typography } from "@mui/material";
 import BackButton from "../../components/BackButton";
+import { Head } from "@inertiajs/react";
 
 export default function Address() {
     return (
