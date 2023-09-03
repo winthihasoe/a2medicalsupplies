@@ -31,4 +31,51 @@ class PageController extends Controller
    {
     return Inertia::render('Admin/Dashboard');
    }
+
+   // --------- Showing product list from home page ---------
+
+   // Manikins
+   public function manikins()
+   {
+    $products = Product::where('category', 'LIKE', '%'.'manikin'.'%')->get();
+    return Inertia::render('ProductList', [
+        'products' => $products,
+    ]);
+   }
+
+   // CPR 
+   public function cpr()
+   {
+    $products = Product::where('category', 'LIKE', '%'.'cpr'.'%')->get();
+    return Inertia::render('ProductList', [
+        'products' => $products,
+    ]);
+   }
+   
+   // Skeletons
+   public function skeleton()
+   {
+    $products = Product::where('category', 'LIKE', '%'.'skeleton'.'%')->get();
+    return Inertia::render('ProductList', [
+        'products' => $products,
+    ]);
+   }
+  
+   // Microscopes
+   public function microscope()
+   {
+    $products = Product::where('category', 'LIKE', '%'.'microscope'.'%')->get();
+    return Inertia::render('ProductList', [
+        'products' => $products,
+    ]);
+   }
+   
+   // Microscopes
+   public function aesthetic()
+   {
+    $products = Product::where('category', 'LIKE', '%'.'aesthetic'.'%')->get();
+    return Inertia::render('ProductList', [
+        'products' => $products,
+    ]);
+   }
 }

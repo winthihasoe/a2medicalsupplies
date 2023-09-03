@@ -1,10 +1,20 @@
 import React from "react";
 import AdminLayout from "../../layouts/AdminLayout";
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
+import {
+    Backdrop,
+    Box,
+    Button,
+    Fade,
+    Grid,
+    TextField,
+    Typography,
+    Modal,
+} from "@mui/material";
 import ProductDescriptionEditor from "../../components/ProductDescriptionEditor";
 import { Head, router, useForm } from "@inertiajs/react";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import { asset } from "@inertiajs/inertia";
+import { useState } from "react";
 
 export default function AdminSingleProduct(props) {
     const product = props.product;
@@ -31,7 +41,7 @@ export default function AdminSingleProduct(props) {
         const newImages = [...data.images];
         const removeImageName = newImages.splice(index, 1)[0];
         setData({ ...data, images: newImages });
-        destroy(route("removeProductImage", removeImageName), data.id);
+        destroy(route("removeProductImage", removeImageName), data);
     };
 
     const handleRemoveNewImage = (index) => {
@@ -65,7 +75,29 @@ export default function AdminSingleProduct(props) {
         router.get(route("adminProducts"));
     };
 
-    console.log(data);
+    // For deleting product
+    const handleDeleteProduct = (e) => {
+        e.preventDefault();
+        destroy(route("deleteProduct", data.id));
+    };
+
+    // For model open and close
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const style = {
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        width: 300,
+        bgcolor: "background.paper",
+        borderRadius: 3,
+        boxShadow: 24,
+        p: 3,
+        textAlign: "center",
+    };
+
     return (
         <AdminLayout heading={"Single Product"}>
             <Head title={product.product_name} />
@@ -224,11 +256,65 @@ export default function AdminSingleProduct(props) {
                     </Grid>
                 </Box>
             </form>
-            <Box px={6}>
-                <Button variant="outlined" fullWidth>
+            <Box px={6} mb={5}>
+                <Button variant="outlined" fullWidth onClick={handleOpen}>
                     Delete Product
                 </Button>
             </Box>
+            <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                open={open}
+                onClose={handleClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}
+            >
+                <Fade in={open}>
+                    <Box sx={style}>
+                        <Typography
+                            id="transition-modal-title"
+                            variant="h6"
+                            component="h2"
+                            gutterBottom
+                        >
+                            Delete this product?
+                        </Typography>
+                        <Typography fontSize={13} align="center">
+                            This process is irreversiable!
+                        </Typography>
+
+                        <Box
+                            sx={{
+                                display: "flex",
+                                gap: 2,
+                                justifyContent: "center",
+                                my: 2,
+                            }}
+                        >
+                            <Button
+                                variant="contained"
+                                color="error"
+                                onClick={handleDeleteProduct}
+                                disabled={processing}
+                                size="small"
+                            >
+                                Yes
+                            </Button>
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                onClick={handleClose}
+                                size="small"
+                            >
+                                No
+                            </Button>
+                        </Box>
+                    </Box>
+                </Fade>
+            </Modal>
         </AdminLayout>
     );
 }

@@ -9,9 +9,28 @@ import {
     Typography,
 } from "@mui/material";
 import BackButton from "../../components/BackButton";
-import { Head } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 
-export default function Profile() {
+export default function Profile(props) {
+    const user = props.user;
+    const { data, setData, post, errors, processing } = useForm({
+        ...user,
+        current_password: "",
+        password: "",
+        password_confirmation: "",
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setData({ ...data, [name]: value });
+    };
+
+    const handleSave = (e) => {
+        e.preventDefault();
+        post(route("updateUser", user.id), data);
+    };
+    console.log(user);
+
     return (
         <AccountLayout>
             <Head title="Profile" />
@@ -22,7 +41,7 @@ export default function Profile() {
                     </Typography>
                 </Box>
                 <Divider />
-                <Box
+                {/* <Box
                     sx={{
                         width: 200,
                         height: 200,
@@ -33,35 +52,121 @@ export default function Profile() {
                 ></Box>
                 <Box align="center">
                     <Button>edit picture</Button>
-                </Box>
+                </Box> */}
                 <form>
                     <Box
                         sx={{
                             display: "flex",
-                            flexDirection: "column",
+                            flexWrap: "wrap",
+                            justifyContent: "center",
                             alignItems: "center",
                             gap: 2,
-                            mb: 5,
+                            my: 5,
                         }}
                     >
                         <Box>
-                            <Typography fontSize={12}>Name:</Typography>
-                            <TextField size="small" />
+                            <Typography fontSize={12}>Name: *</Typography>
+                            <TextField
+                                size="small"
+                                value={data.name}
+                                onChange={handleChange}
+                                name="name"
+                                type="text"
+                                required
+                            />
+                            {errors.name && (
+                                <Typography fontSize={12}>
+                                    {errors.name}
+                                </Typography>
+                            )}
                         </Box>
                         <Box>
-                            <Typography fontSize={12}>Email:</Typography>
-                            <TextField size="small" />
+                            <Typography fontSize={12}>Email: *</Typography>
+                            <TextField
+                                size="small"
+                                value={data.email}
+                                onChange={handleChange}
+                                name="email"
+                                type="email"
+                                required
+                            />
+                            {errors.email && (
+                                <Typography fontSize={12}>
+                                    {errors.email}
+                                </Typography>
+                            )}
                         </Box>
                         <Box>
-                            <Typography fontSize={12}>Phone:</Typography>
-                            <TextField size="small" />
+                            <Typography fontSize={12}>Phone: *</Typography>
+                            <TextField
+                                size="small"
+                                value={data.phone}
+                                onChange={handleChange}
+                                name="phone"
+                                type="number"
+                                required
+                            />
+                            {errors.phone && (
+                                <Typography fontSize={12}>
+                                    {errors.phone}
+                                </Typography>
+                            )}
+                        </Box>
+                        <Box>
+                            <Typography fontSize={12}>
+                                Current Password:
+                            </Typography>
+                            <TextField
+                                size="small"
+                                name="current_password"
+                                type="password"
+                                value={data.current_password}
+                                onChange={handleChange}
+                            />
+                            {errors.current_password && (
+                                <Typography fontSize={12}>
+                                    {errors.current_password}
+                                </Typography>
+                            )}
                         </Box>
                         <Box>
                             <Typography fontSize={12}>Password:</Typography>
-                            <TextField size="small" />
+                            <TextField
+                                size="small"
+                                name="password"
+                                type="password"
+                                value={data.password}
+                                onChange={handleChange}
+                            />
+                            {errors.current_password && (
+                                <Typography fontSize={12}>
+                                    {errors.password}
+                                </Typography>
+                            )}
                         </Box>
                         <Box>
-                            <Button variant="contained" size="small">
+                            <Typography fontSize={12}>
+                                Confirm Password:
+                            </Typography>
+                            <TextField
+                                size="small"
+                                name="password_confirmation"
+                                type="password"
+                                value={data.password_confirmation}
+                                onChange={handleChange}
+                            />
+                            {errors.current_password && (
+                                <Typography fontSize={12}>
+                                    {errors.password_confirmation}
+                                </Typography>
+                            )}
+                        </Box>
+                        <Box width="100%" align="center">
+                            <Button
+                                variant="contained"
+                                size="small"
+                                onClick={handleSave}
+                            >
                                 Save
                             </Button>
                         </Box>

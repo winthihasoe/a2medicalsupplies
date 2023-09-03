@@ -3,68 +3,38 @@ import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
 import UserLayout from "../layouts/UserLayout";
 import Footer from "../components/Footer";
-import { Head } from "@inertiajs/react";
+import { Head, router } from "@inertiajs/react";
+import { Inertia } from "@inertiajs/inertia";
+import ManikinHome from "@/components/Home/ManikinHome";
+import CPRHome from "@/components/Home/CPRHome";
+import SkeletonHome from "@/components/Home/SkeletonHome";
+import MicroscopeHome from "@/components/Home/MicroscopeHome";
+import AestheticsHome from "@/components/Home/AestheticsHome";
+import ChildDummyHome from "@/components/Home/ChildDummyHome";
 
-export default function Home({ description }) {
+export default function Home() {
     return (
         <UserLayout>
             <Head title="Home" />
             <Box my={3}>
                 <Grid container columnSpacing={1.5}>
                     <Grid item>
-                        <Box
-                            sx={{
-                                width: 165,
-                                height: 239,
-                                flexShrink: 0,
-                                border: "1px solid #d2d2d2",
-                                borderRadius: 5,
-                                backgroundColor: "#f6eded",
-                            }}
-                        ></Box>
+                        <ManikinHome />
                     </Grid>
                     <Grid item>
                         <Grid container direction="column" rowSpacing={2}>
                             <Grid item>
-                                <Box
-                                    sx={{
-                                        width: 174,
-                                        height: 109,
-                                        flexShrink: 0,
-                                        border: "1px solid #d2d2d2",
-                                        borderRadius: 5,
-                                        backgroundColor: "#f6eded",
-                                    }}
-                                ></Box>
+                                <CPRHome />
                             </Grid>
                             <Grid item>
-                                <Box
-                                    sx={{
-                                        width: 174,
-                                        height: 109,
-                                        flexShrink: 0,
-                                        border: "1px solid #d2d2d2",
-                                        borderRadius: 5,
-                                        backgroundColor: "#f6eded",
-                                    }}
-                                ></Box>
+                                <SkeletonHome />
                             </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
             </Box>
             <Box my={3}>
-                <Box
-                    sx={{
-                        width: 348,
-                        height: 150,
-                        flexShrink: 0,
-
-                        borderRadius: 5,
-                        background:
-                            "linear-gradient(211deg, #FFF 0%, rgba(210, 209, 209, 0.82) 97.73%)",
-                    }}
-                ></Box>
+                <MicroscopeHome />
             </Box>
             <Box
                 my={3}
@@ -72,34 +42,8 @@ export default function Home({ description }) {
                 justifyContent="space-around"
                 alignItems="center"
             >
-                <Box>
-                    <Box
-                        sx={{
-                            width: 132,
-                            height: 132,
-                            borderRadius: "50%",
-                            backgroundColor: "#f6eded",
-                            mb: 1,
-                        }}
-                    ></Box>
-                    <Typography variant="subtitle1" align="center">
-                        Aesthetics
-                    </Typography>
-                </Box>
-                <Box>
-                    <Box
-                        sx={{
-                            width: 132,
-                            height: 132,
-                            borderRadius: "50%",
-                            backgroundColor: "#f6eded",
-                            mb: 1,
-                        }}
-                    ></Box>
-                    <Typography variant="subtitle1" align="center">
-                        Child Dummy
-                    </Typography>
-                </Box>
+                <AestheticsHome />
+                <ChildDummyHome />
             </Box>
             <Box my={3}>
                 <Box

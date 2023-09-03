@@ -2,6 +2,7 @@ import React from "react";
 import AdminLayout from "../../layouts/AdminLayout";
 import { Box, Container, Divider, Typography } from "@mui/material";
 import { InertiaLink } from "@inertiajs/inertia-react";
+import { Head } from "@inertiajs/react";
 
 export default function Dashboard() {
     const DashboardMenu = [
@@ -29,6 +30,7 @@ export default function Dashboard() {
     ];
     return (
         <AdminLayout heading={"Dashboard"}>
+            <Head title="Dashboard" />
             <Container>
                 {/* Stock list is fixed sized box and it will be scrollable inside */}
                 <Box

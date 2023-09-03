@@ -3,15 +3,20 @@ import UserLayout from "../../layouts/UserLayout";
 import { Box, Button, Typography } from "@mui/material";
 import CartItemCard from "../../components/CartItemCard";
 import { Head } from "@inertiajs/react";
+import NumberWithComma from "@/components/NumberWithComma";
 
-export default function Cart() {
+export default function Cart(props) {
+    const carts = props.carts;
+    const totalAmount = props.totalAmount;
     return (
         <UserLayout>
             <Head title="Cart" />
             <Typography fontSize={20} fontWeight={400} mt={3}>
                 My Cart
             </Typography>
-            <CartItemCard />
+            {carts.map((cart) => (
+                <CartItemCard cart={cart} key={cart.id} />
+            ))}
 
             <Box
                 sx={{
@@ -38,7 +43,7 @@ export default function Cart() {
                             fontSize: { xs: 16, sm: 17, md: 18 },
                         }}
                     >
-                        Total Amount: 1,650,000 Ks
+                        Total Amount: <NumberWithComma value={totalAmount} /> Ks
                     </Typography>
                 </Box>
             </Box>

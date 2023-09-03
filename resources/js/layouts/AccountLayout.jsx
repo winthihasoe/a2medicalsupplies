@@ -12,9 +12,9 @@ export default function AccountLayout({ children }) {
             }}
         >
             <AppBar />
-            <Container component="main" maxWidth="xs">
+            <Box component="main" maxWidth="xs">
                 {children}
-            </Container>
+            </Box>
         </Box>
     );
 }

@@ -15,7 +15,6 @@ function ProductDescriptionEditor({ initialValue, handleChangeDescription }) {
                 { indent: "-1" },
                 { indent: "+1" },
             ],
-            ["image"],
         ],
     };
 
@@ -29,13 +28,12 @@ function ProductDescriptionEditor({ initialValue, handleChangeDescription }) {
         "list",
         "bullet",
         "indent",
-        "link",
-        "image",
+        "background",
         "color",
     ];
 
     return (
-        <div style={{ minHeight: "200px" }}>
+        <div>
             <ReactQuill
                 value={initialValue}
                 onChange={handleChangeDescription}

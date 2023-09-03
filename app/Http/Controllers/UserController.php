@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -19,7 +21,55 @@ class UserController extends Controller
     // Show user profile page
     public function profile()
     {
-        return Inertia::render('User/Profile');
+        $user = Auth()->user();
+        return Inertia::render('User/Profile', [
+            'user' => $user,
+        ]);
+    }
+
+    // Updata user data
+    public function updateUser(Request $request)
+    {
+        $user = Auth::user();
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique('users')->ignore(auth()->id()),
+            ],
+            'phone' => [
+                'required',
+                Rule::unique('users')->ignore(auth()->id()),
+            ],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'current_password' => 'nullable|string',
+            'password' =>  ['nullable', 'different:current_password', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        // Update user information
+        $user = Auth::user();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->save();
+        
+        // Update password if provided
+        if ($request->filled('current_password') && $request->filled('password')) {
+            if (Hash::check($request->current_password, $user->password)) {
+                if ($request->current_password === $request->password) {
+                    return back()->with('message', 'Password is the same as the current password.');
+                }
+                $user->password = Hash::make($request->password);
+                $user->save();
+            } else{
+                return back()->with('error', 'Wrong current password');
+            }
+        } 
+        
+        return redirect()->route('account')->with('success', 'Update successful');
     }
 
     // Create new user via Register form
@@ -32,7 +82,6 @@ class UserController extends Controller
             'password' => 'required | confirmed | min: 8',
         ]);
 
-        dd($request);
 
         $user = User::create([
             'name' => $request->name,

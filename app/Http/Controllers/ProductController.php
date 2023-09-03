@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +15,9 @@ class ProductController extends Controller
     // Add new product from admin
     public function addProduct()
     {
-        return Inertia::render('Admin/AddProduct');
+        return Inertia::render('Admin/AddProduct', [
+            'categories' => Category::all(),
+        ]);
     }
 
     // Store new product
@@ -24,7 +27,9 @@ class ProductController extends Controller
             'product_name' => 'required',
             'price' => 'required',
             'category' => 'required',
-            'images' => 'nullable|array'
+            'images' => 'nullable|array',
+            'description' => 'nullable',
+            'stock' => 'required'
         ]);
 
        
@@ -43,15 +48,12 @@ class ProductController extends Controller
             $data['images'] = $images;
 
             Product::create($data);
-            
-            
-             
-             // Commit the transaction
-             DB::commit();
+
+            // Commit the transaction
+            DB::commit();
  
- 
-             // Return a success response
-             return redirect()->route('adminProducts')->with('success', 'Product added successfully');
+            // Return a success response
+            return redirect()->route('adminProducts')->with('success', 'Product added successfully');
          } catch (\Exception $e) {
              // Roll back the transaction in case of any error
              DB::rollBack();
@@ -69,9 +71,10 @@ class ProductController extends Controller
          $data = $request->validate([
             'product_name' => 'required|string|max:255',
             'price' => 'required|numeric',
-            'description' => 'nullable|string',
+            'description' => 'nullable',
             'images' => 'nullable|array',
-            'new_images' => 'nullable|array'
+            'new_images' => 'nullable|array',
+            'category' => 'required|string'
             // Add more validation rules as needed
         ]);
         
@@ -81,7 +84,7 @@ class ProductController extends Controller
 
         
         if($request->hasFile('new_images')) {
-            $images = [];
+            $images = $request->images;
             foreach ($request->file('new_images') as $uploadedImage) {
                 $fileName = uniqid().'_'.$uploadedImage->getClientOriginalName();
                 $image_path = $uploadedImage->storeAs('images/products', $fileName,'public');
@@ -118,6 +121,7 @@ class ProductController extends Controller
 
         return Inertia::render('Admin/AdminSingleProduct', [
             'product' => Product::findOrFail($productId),
+            'categories' => Category::all(),
         ]);
     }
 
@@ -130,19 +134,40 @@ class ProductController extends Controller
         if (File::exists($imagePath)) {
             File::delete($imagePath);
             
-            $updatedImages = [];
-            foreach($request->images as $image) {
-                if ($image !== $removeImageName) 
-                {
-                    $updatedImages[] = $image;
-                }
-            }
+            // $updatedImages = [];
+            // foreach($request->images as $image) {
+            //     if ($image !== $removeImageName) 
+            //     {
+            //         $updatedImages[] = $image;
+            //     }
+            // }
+
             $product = Product::findOrFail($request->id);
-            $product->images = $updatedImages;
+            $product->images = $request->images;
 
             return back()->with('message', 'Photo deleted!');
         }
 
         return response()->json(['message' => 'Image not found'], 404);
+    }
+
+    // Delete whole product 
+    public function deleteProduct($productId)
+    {
+        $deleteProduct = Product::findOrFail($productId);
+        $deleteProduct->delete();
+
+        return redirect()->route('adminProducts')->with('success', 'Product Deleted');
+    }
+
+
+    // ------------- Below is the User side ----------------
+
+    public function singleProduct($productId)
+    {
+        $product = Product::findOrFail($productId);
+        return Inertia::render('SingleProduct', [
+            'product' => $product,
+        ]);
     }
 }

@@ -4,7 +4,9 @@ import { Head, useForm, useRemember } from "@inertiajs/react";
 import {
     Box,
     Button,
+    Chip,
     Container,
+    Divider,
     Grid,
     TextField,
     Typography,
@@ -12,13 +14,16 @@ import {
 import React from "react";
 import { useState } from "react";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import CreateCategoryModal from "@/components/CreateCategoryModal";
 
-export default function AddProduct() {
+export default function AddProduct(props) {
+    const categories = props.categories;
     const { data, setData, post, processing, progress, errors } = useForm({
         product_name: "",
         price: "",
         description: "",
-        category: "teaching material",
+        category: "",
+        stock: "",
         images: [],
     });
 
@@ -30,7 +35,7 @@ export default function AddProduct() {
     const handleRemoveImage = (index) => {
         const newImages = [...data.images];
         newImages.splice(index, 1);
-        setData({ ...data, images: newImages });
+        setFormState({ ...data, images: newImages });
     };
 
     const handleChange = (e) => {
@@ -49,7 +54,6 @@ export default function AddProduct() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         post(route("storeProduct"), data);
     };
     console.log(data);
@@ -124,6 +128,7 @@ export default function AddProduct() {
                         style={{ display: "none" }}
                     />
                 </label>
+                <Divider />
                 <form>
                     <Box
                         sx={{
@@ -141,6 +146,7 @@ export default function AddProduct() {
                                 name="product_name"
                                 onChange={handleChange}
                                 value={data.product_name}
+                                required
                             />
                         </Box>
                         <Box>
@@ -152,8 +158,48 @@ export default function AddProduct() {
                                 name="price"
                                 onChange={handleChange}
                                 value={data.price}
+                                required
                             />
                         </Box>
+                        <Box>
+                            <Typography fontSize={12}>Stock:</Typography>
+                            <TextField
+                                size="small"
+                                fullWidth
+                                type="number"
+                                name="stock"
+                                onChange={handleChange}
+                                value={data.stock}
+                                required
+                            />
+                        </Box>
+                        <Divider />
+                        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
+                            {categories.map((category) => (
+                                <Chip
+                                    key={category.id}
+                                    label={category.category_name}
+                                    size="small"
+                                    onClick={() =>
+                                        setData({
+                                            ...data,
+                                            category: category.category_name,
+                                        })
+                                    }
+                                    style={{
+                                        backgroundColor:
+                                            data.category ===
+                                            category.category_name
+                                                ? "orange" // Change this to the desired color
+                                                : "", // Default color for unselected chips
+                                    }}
+                                />
+                            ))}
+                        </Box>
+                        <Box align="center">
+                            <CreateCategoryModal />
+                        </Box>
+                        <Divider />
 
                         <Box>
                             <Typography fontSize={12}>Description:</Typography>

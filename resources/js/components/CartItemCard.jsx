@@ -3,6 +3,7 @@ import {
     Card,
     CardContent,
     CardMedia,
+    Chip,
     Divider,
     Grid,
     IconButton,
@@ -10,8 +11,17 @@ import {
 } from "@mui/material";
 import React from "react";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import NumberWithComma from "./NumberWithComma";
+import { router } from "@inertiajs/react";
 
-export default function CartItemCard() {
+export default function CartItemCard(props) {
+    const cart = props.cart;
+
+    const handleDeleteCart = (e) => {
+        e.preventDefault();
+        router.delete(route("deleteCart", cart.id));
+    };
+    console.log(cart);
     return (
         <Box
             sx={{
@@ -30,22 +40,34 @@ export default function CartItemCard() {
                             height: 73,
                             backgroundColor: "#efefef",
                             borderRadius: 5,
+                            overflow: "hidden",
                         }}
-                    ></Box>
+                    >
+                        <img
+                            src={`/storage/images/products/${cart.product.images[0]}`}
+                            width="100%"
+                        />
+                    </Box>
                 </Grid>
                 <Grid item xs={6}>
                     <Typography fontSize={14} fontWeight={400}>
-                        Nursing manikin with exchangable genital parts
+                        {cart.product.product_name}
                     </Typography>
-
-                    <Grid container></Grid>
 
                     <Typography sx={{ fontWeight: 900, fontSize: 18 }}>
-                        1,650,000 Ks
+                        <NumberWithComma value={cart.product.price} /> Ks
                     </Typography>
+
+                    {cart.product.stock == 0 && (
+                        <Chip
+                            label="Preorder only"
+                            size="small"
+                            variant="outlined"
+                        />
+                    )}
                 </Grid>
                 <Grid item xs={2}>
-                    <IconButton>
+                    <IconButton onClick={handleDeleteCart}>
                         <DeleteRoundedIcon fontSize="small" />
                     </IconButton>
 
@@ -54,7 +76,7 @@ export default function CartItemCard() {
                             fontSize: { xs: 12, sm: 13, md: 15 },
                         }}
                     >
-                        Qty: 2
+                        Qty: {cart.qty}
                     </Typography>
                 </Grid>
             </Grid>
