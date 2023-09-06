@@ -23,6 +23,7 @@ Route::get('/aesthetic', [PageController::class, 'aesthetic'])->name('aesthetic'
 Route::middleware(['auth'])->group(function () {
     Route::post('/cart', [CartController::class, 'addToCart'])->name('addToCart');
     Route::get('/cart', [CartController::class, 'showCart'])->name('showCart');
+    Route::put('/cart/{cartId}', [CartController::class, 'changeCartQty'])->name('changeCartQty');
     Route::delete('/cart/{cartId}', [CartController::class, 'deleteCart'])->name('deleteCart');
     Route::get('/checkout', [CheckoutController::class, 'showCheckout'])->name('showCheckout');
     Route::get('/success-order', [OrderController::class, 'successOrder'])->name('successOrder');
@@ -33,7 +34,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/profile', [UserController::class, 'updateUser'])->name('updateUser');
     Route::get('/my-orders', [OrderController::class, 'userOrders'])->name('userOrders');
     Route::get('/my-single-order', [OrderController::class, 'userSingleOrder'])->name('userSingleOrder');
-    Route::get('address', [AddressController::class, 'address'])->name('address');
+    Route::get('/address', [AddressController::class, 'address'])->name('address');
+    Route::post('/address', [AddressController::class, 'storeAddress'])->name('storeAddress');
 
     // Show single product for user
     Route::get('/single-product/{productId}', [ProductController::class, 'singleProduct'])->name('singleProduct');

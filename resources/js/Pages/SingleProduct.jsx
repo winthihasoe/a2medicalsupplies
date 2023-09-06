@@ -96,16 +96,19 @@ export default function SingleProduct(props) {
                     left: 0,
                     width: "100%",
                     zIndex: 1,
+                    bgcolor: "#dedede",
                 }}
             >
                 <Box
-                    p={2}
-                    display="flex"
-                    justifyContent="space-around"
-                    alignContent="center"
-                    gap={2}
-                    px={4}
-                    bgcolor="#dedede"
+                    sx={{
+                        p: 2,
+                        display: "flex",
+                        justifyContent: "space-around",
+                        gap: 2,
+                        px: 4,
+                        width: 300,
+                        margin: "0 auto",
+                    }}
                 >
                     <Button variant="outlined" fullWidth>
                         Quotation

@@ -50,6 +50,17 @@ class CartController extends Controller
         return redirect()->route('showCart')->with('success', 'Product added to cart!');
     }
 
+    // Chaange Cart Qty from CartQtyToggle component
+    public function changeCartQty(Request $request, $cartId)
+    {
+    
+        $cart = Cart::findOrFail($cartId);
+        $cart->qty = $request->input('qty');;
+        $cart->save();
+
+        return back()->with('success', 'Product added to cart!');
+    }
+
     // Delete specific cart 
     public function deleteCart($cartId)
     {
