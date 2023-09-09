@@ -6,6 +6,7 @@ import CartItemCard from "@/components/CartItemCard";
 import NumberWithComma from "@/components/NumberWithComma";
 import { useState } from "react";
 import NewAddressForm from "@/components/User/NewAddressForm";
+import { useEffect } from "react";
 
 export default function Checkout(props) {
     const carts = props.carts;
@@ -15,11 +16,43 @@ export default function Checkout(props) {
     const [isAdding, setIsAdding] = useState(false);
 
     const { data, setData, post, processing, errors, reset } = useForm({
-        ...address,
+        items: carts,
+        address: address?.address,
+        city: address?.city,
+        phone: address?.phone,
+        totalAmount: totalAmount,
+        customer_name: "",
     });
+
+    // IF the customer hasn't address, new address form and its state
+    const {
+        data: newAddress,
+        setData: setNewAddress,
+        post: storeNewAddressPost,
+        errors: newAddressErrors,
+    } = useForm({
+        address: "",
+        city: "",
+        phone: "",
+    });
+
+    useEffect(() => {
+        setData({
+            items: carts,
+            address: address?.address,
+            city: address?.city,
+            phone: address?.phone,
+            totalAmount: totalAmount,
+        });
+    }, [carts, address, totalAmount]);
 
     // Customer fill the Address form
     const handleChange = (e) => {
+        const { name, value } = e.target;
+        setNewAddress({ ...newAddress, [name]: value });
+    };
+
+    const handleCustomerName = (e) => {
         const { name, value } = e.target;
         setData({ ...data, [name]: value });
     };
@@ -27,23 +60,23 @@ export default function Checkout(props) {
     // Customer add new address
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route("storeAddress"), {
+        storeNewAddressPost(route("storeAddress"), {
             onSuccess: () => {
-                setData({
-                    address: "",
-                    city: "",
-                    phone: "",
-                });
                 setIsAdding(false);
             },
-            data,
+            newAddress,
         });
     };
 
     const handleSubmitOrder = (e) => {
         e.preventDefault();
-        post(route("storeOrder"));
+        if (!address) {
+            alert("Please enter address to deliver");
+        } else {
+            post(route("placeOrder"), data);
+        }
     };
+    console.log(data);
 
     return (
         <UserLayout>
@@ -75,6 +108,15 @@ export default function Checkout(props) {
                     <Typography fontSize={20} fontWeight={600} my={2}>
                         Checkout
                     </Typography>
+                    <Box sx={{ mb: 2 }}>
+                        <TextField
+                            label="Customer name"
+                            size="small"
+                            name="customer_name"
+                            value={data.customer_name}
+                            onChange={handleCustomerName}
+                        />
+                    </Box>
                     <Box sx={{ p: 2, border: "2px dashed #ba7636" }}>
                         <Box
                             sx={{
@@ -86,29 +128,29 @@ export default function Checkout(props) {
                             <Typography fontSize={18} fontWeight={600} mb={1}>
                                 Deliver to:
                             </Typography>
-                            <Button
-                                size="small"
-                                onClick={() => setIsAdding(!isAdding)}
-                            >
-                                Change address
-                            </Button>
+                            {address && (
+                                <Button
+                                    size="small"
+                                    onClick={() => setIsAdding(!isAdding)}
+                                >
+                                    Change address
+                                </Button>
+                            )}
                         </Box>
-                        {!address.address ? (
-                            <Button
-                                variant="contained"
-                                fullWidth
-                                px={4}
-                                onClick={() => setIsAdding(!isAdding)}
-                            >
-                                Add New Address
-                            </Button>
+                        {!address ? (
+                            <Box px={7}>
+                                <Button
+                                    variant="contained"
+                                    fullWidth
+                                    onClick={() => setIsAdding(!isAdding)}
+                                    size="small"
+                                >
+                                    Add New Address
+                                </Button>
+                            </Box>
                         ) : (
                             <Typography align="center" fontSize={15}>
-                                {address.address +
-                                    ", " +
-                                    address.city +
-                                    ", " +
-                                    address.phone}
+                                {data.address}, {data.city}, {data.phone}
                             </Typography>
                         )}
                     </Box>
@@ -116,12 +158,10 @@ export default function Checkout(props) {
                     {/* If the customer want to change the current address, New address form is Here */}
                     {isAdding && (
                         <NewAddressForm
-                            data={data}
-                            setData={setData}
+                            data={newAddress}
                             handleChange={handleChange}
                             handleSubmit={handleSubmit}
-                            processing={processing}
-                            errors={errors}
+                            errors={newAddressErrors}
                         />
                     )}
 
@@ -134,6 +174,8 @@ export default function Checkout(props) {
                             position: "fixed",
                             bottom: 0,
                             left: 0,
+                            bgcolor: "#ffffff",
+                            opacity: "90%",
                             width: "100%",
                         }}
                     >
@@ -149,7 +191,7 @@ export default function Checkout(props) {
                             <Typography
                                 sx={{
                                     fontWeight: 900,
-                                    fontSize: { xs: 16, sm: 17, md: 18 },
+                                    fontSize: { xs: 14, sm: 16, md: 16 },
                                 }}
                             >
                                 Total Amount:{" "}
@@ -158,6 +200,7 @@ export default function Checkout(props) {
                             <Button
                                 variant="contained"
                                 onClick={handleSubmitOrder}
+                                disabled={processing}
                             >
                                 Place Order
                             </Button>

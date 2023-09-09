@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('order_number')->unique();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('customer_name')->nullable();
             $table->unsignedInteger('total_amount');
             $table->unsignedInteger('delivery_fee')->nullable();
             $table->string('status')->default('pending');
             $table->text('address')->nullable();
-            $table->foreignId('address_id')->nullable()->constrained()->onDelete('set null'); // The address added by users can't be deleted.
             $table->string('payment_method')->nullable();
             $table->string('payment_status')->nullable();
             $table->string('promo_code')->nullable();

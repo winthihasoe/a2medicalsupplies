@@ -1,18 +1,8 @@
-import {
-    Box,
-    Card,
-    CardContent,
-    CardMedia,
-    Chip,
-    Divider,
-    Grid,
-    IconButton,
-    Typography,
-} from "@mui/material";
+import { Box, Chip, Grid, IconButton, Typography } from "@mui/material";
 import React from "react";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import NumberWithComma from "./NumberWithComma";
-import { router } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
 import CartQtyToggle from "./CartQtyToggle";
 import { CartItemContext } from "@/context/CartItemContext";
 
@@ -57,37 +47,56 @@ export default function CartItemCard(props) {
             >
                 <Grid container spacing={1} alignItems="center">
                     <Grid item xs={4}>
-                        <Box
-                            sx={{
-                                width: 100,
-                                height: 73,
-                                backgroundColor: "#efefef",
-                                borderRadius: 4,
-                                overflow: "hidden",
-                            }}
+                        <Link
+                            href={route("singleProduct", cart.product.id)}
+                            className="inertia-link"
                         >
-                            <img
-                                src={`/storage/images/products/${cart.product.images[0]}`}
-                                width="100%"
-                            />
-                        </Box>
+                            <Box
+                                sx={{
+                                    width: 100,
+                                    height: 73,
+                                    backgroundColor: "#efefef",
+                                    borderRadius: 4,
+                                    overflow: "hidden",
+                                }}
+                            >
+                                <img
+                                    src={`/storage/images/products/${cart.product.images[0]}`}
+                                    width="100%"
+                                />
+                            </Box>
+                        </Link>
                     </Grid>
                     <Grid item xs={5}>
-                        <Typography fontSize={14} fontWeight={400}>
-                            {cart.product.product_name}
-                        </Typography>
+                        <Link
+                            href={route("singleProduct", cart.product.id)}
+                            className="inertia-link"
+                        >
+                            <Typography fontSize={13} fontWeight={400}>
+                                {cart.product.product_name.length > 25
+                                    ? cart.product.product_name.substr(0, 25) +
+                                      "..." // Truncate to 20 characters and add ellipsis
+                                    : cart.product.product_name}
+                            </Typography>
 
-                        <Typography sx={{ fontWeight: 900, fontSize: 16 }}>
-                            <NumberWithComma value={cart.product.price} /> Ks
-                        </Typography>
+                            <Typography sx={{ fontWeight: 900, fontSize: 16 }}>
+                                <NumberWithComma value={cart.product.price} />{" "}
+                                Ks
+                            </Typography>
 
-                        {cart.product.stock == 0 && (
-                            <Chip
-                                label="Preorder only"
-                                size="small"
-                                variant="outlined"
-                            />
-                        )}
+                            {cart.product.stock == 0 && (
+                                <Chip
+                                    label="Preorder only"
+                                    size="small"
+                                    variant="outlined"
+                                />
+                            )}
+                            {cart.product.stock == 1 && (
+                                <Typography fontSize={9} color="red">
+                                    Only 1 item left
+                                </Typography>
+                            )}
+                        </Link>
                     </Grid>
                     <Grid item xs={3}>
                         <Box

@@ -26,31 +26,27 @@ export default function AdminBar(props) {
     const MenuList = [
         {
             Title: "Home",
-            Link: "/",
+            Link: "home",
         },
         {
             Title: "Dashboard",
-            Link: "/admin/dashboard",
+            Link: "dashboard",
         },
         {
             Title: "Add Product",
-            Link: "/admin/add-product",
+            Link: "addProduct",
         },
         {
             Title: "Products",
-            Link: "#",
+            Link: "dashboard",
         },
         {
             Title: "Orders",
-            Link: "#",
+            Link: "adminOrders",
         },
         {
             Title: "Users",
-            Link: "#",
-        },
-        {
-            Title: "Layout",
-            Link: "#",
+            Link: "dashboard",
         },
     ];
     return (
@@ -110,7 +106,7 @@ export default function AdminBar(props) {
                                 {MenuList.map((Menu) => (
                                     <ListItem key={Menu.Title}>
                                         <Link
-                                            href={Menu.Link}
+                                            href={route(Menu.Link)}
                                             className="inertia-link"
                                             as="div"
                                         >

@@ -1,12 +1,5 @@
 import React from "react";
-import {
-    Box,
-    Button,
-    Container,
-    Divider,
-    TextField,
-    Typography,
-} from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 
 export default function NewAddressForm({
     data,
@@ -15,7 +8,6 @@ export default function NewAddressForm({
     processing,
     errors,
 }) {
-    console.log(data);
     return (
         <Box sx={{ my: 2, p: 2, border: "3px dashed blue", borderRadius: 4 }}>
             <Typography fontSize={18} mb={1}>

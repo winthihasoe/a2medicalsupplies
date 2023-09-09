@@ -34,7 +34,7 @@ export default function Profile(props) {
     return (
         <AccountLayout>
             <Head title="Profile" />
-            <Container>
+            <Container maxWidth="xs">
                 <Box mb={2}>
                     <Typography fontSize={20} fontWeight={700}>
                         <BackButton /> Profile

@@ -70,5 +70,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'isAdmin' => AdminMiddleware::class,
         'isEditor' => EditorMiddleware::class,
+        'order.owner' => \App\Http\Middleware\CheckOrderOwnership::class,
     ];
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import UserLayout from "../../layouts/UserLayout";
 import { Box, Button, Typography } from "@mui/material";
-import { Head } from "@inertiajs/inertia-react";
+import { Head, router } from "@inertiajs/react";
 
 export default function SuccessOrder() {
     return (
@@ -12,7 +12,12 @@ export default function SuccessOrder() {
                     Your order is placed successfully.
                 </Typography>
                 <Box mb={1}>
-                    <Button variant="contained" size="small" fullWidth>
+                    <Button
+                        onClick={() => router.get(route("home"))}
+                        variant="contained"
+                        size="small"
+                        fullWidth
+                    >
                         Go to Home
                     </Button>
                 </Box>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Container, Divider, Typography } from "@mui/material";
 import AccountLayout from "../../layouts/AccountLayout";
 import { Head, Link } from "@inertiajs/react";
 
@@ -29,27 +29,29 @@ export default function Account() {
     return (
         <AccountLayout>
             <Head title="Account" />
-            <Box sx={{ p: 2 }}>
-                {AccountMenus.map((Menu) => (
-                    <Box>
-                        <Box
-                            sx={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                                alignItems: "center",
-                                px: 2,
-                                my: 3,
-                            }}
-                        >
-                            <Typography fontSize={22} fontWeight={700}>
-                                {Menu.Title}
-                            </Typography>
-                            <Link href={Menu.Link}>{Menu.Button}</Link>
+            <Container maxWidth="xs">
+                <Box sx={{ p: 2 }}>
+                    {AccountMenus.map((Menu) => (
+                        <Box>
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    alignItems: "center",
+                                    px: 2,
+                                    my: 3,
+                                }}
+                            >
+                                <Typography fontSize={22} fontWeight={700}>
+                                    {Menu.Title}
+                                </Typography>
+                                <Link href={Menu.Link}>{Menu.Button}</Link>
+                            </Box>
+                            <Divider />
                         </Box>
-                        <Divider />
-                    </Box>
-                ))}
-            </Box>
+                    ))}
+                </Box>
+            </Container>
         </AccountLayout>
     );
 }

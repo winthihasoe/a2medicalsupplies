@@ -4,9 +4,6 @@ import { Box, Button, Typography } from "@mui/material";
 import CartItemCard from "../../components/CartItemCard";
 import { Head, router, useForm } from "@inertiajs/react";
 import NumberWithComma from "@/components/NumberWithComma";
-import { CartContext } from "@/context/CartContext";
-import { useMemo } from "react";
-import { useState } from "react";
 
 export default function Cart(props) {
     const carts = props.carts;
@@ -52,7 +49,8 @@ export default function Cart(props) {
                             bottom: 0,
                             left: 0,
                             width: "100%",
-                            opacity: "80%",
+                            opacity: "90%",
+                            bgcolor: "#ffffff",
                         }}
                     >
                         <Box

@@ -4,6 +4,7 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\DrugController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
@@ -26,6 +27,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/cart/{cartId}', [CartController::class, 'changeCartQty'])->name('changeCartQty');
     Route::delete('/cart/{cartId}', [CartController::class, 'deleteCart'])->name('deleteCart');
     Route::get('/checkout', [CheckoutController::class, 'showCheckout'])->name('showCheckout');
+    Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('placeOrder');
     Route::get('/success-order', [OrderController::class, 'successOrder'])->name('successOrder');
     
     // These routes are user account related pages
@@ -33,19 +35,28 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
     Route::post('/profile', [UserController::class, 'updateUser'])->name('updateUser');
     Route::get('/my-orders', [OrderController::class, 'userOrders'])->name('userOrders');
-    Route::get('/my-single-order', [OrderController::class, 'userSingleOrder'])->name('userSingleOrder');
+    Route::get('/my-single-order/{orderId}', [OrderController::class, 'singleOrder'])->middleware('order.owner')->name('singleOrder');
     Route::get('/address', [AddressController::class, 'address'])->name('address');
     Route::post('/address', [AddressController::class, 'storeAddress'])->name('storeAddress');
-
+    Route::put('/review-by-customer/{orderId}', [OrderController::class, 'reviewByCustomer'])->name('reviewByCustomer');
+    Route::put('delete-review/{orderId}', [OrderController::class, 'deleteReview'])->name('deleteReview');
+    
     // Show single product for user
     Route::get('/single-product/{productId}', [ProductController::class, 'singleProduct'])->name('singleProduct');
 });
 
 Route::prefix('admin')->middleware(['isAdmin'])->group(function() {
     Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
-    Route::get('/order-history', [OrderController::class, 'adminOrders'])->name('adminOrders');
-    Route::get('/single-order-history', [OrderController::class, 'adminSingleOrders'])->name('adminSingleOrders');
 
+    Route::get('/order-history', [OrderController::class, 'adminOrders'])->name('adminOrders');
+    Route::get('single-order-history/{orderId}', [OrderController::class, 'adminSingleOrder'])->name('adminSingleOrder');
+    
+    // Update status by admin
+    Route::put('/orders/{orderId}', [OrderController::class, 'adminUpdateOrder'])->name('adminUpdateOrder');
+    
+    // Update address by admin
+    Route::put('/orders/update-address/{orderId}', [OrderController::class, 'updateAddressByAdmin'])->name('updateAddressByAdmin');
+    
     // Product 
     Route::get('/add-product', [ProductController::class, 'addProduct'])->name('addProduct');
     Route::post('/add-product', [ProductController::class, 'storeProduct'])->name('storeProduct');
@@ -59,6 +70,15 @@ Route::prefix('admin')->middleware(['isAdmin'])->group(function() {
 
     // Category 
     Route::post('/add-category', [CategoryController::class, 'addCategory'])->name('addCategory');
+
+    //Pharmacy
+    Route::get('add-drug', [DrugController::class, 'add']);
+    Route::post('add-drug', [DrugController::class, 'store']);
+    Route::get('{drug}', [DrugController::class, 'show'])->name('showDrug');
+    Route::get('drug/{drug}', [DrugController::class, 'edit']);
+    Route::put('drug/update/{drug}', [DrugController::class, 'update']);
+    Route::delete('drug/destroy/{drug}', [DrugController::class, 'destroy'])->name('drug.destroy');
+    
 });
 
 // Route::get('/dashboard', function () {

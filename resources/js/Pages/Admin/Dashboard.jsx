@@ -11,7 +11,6 @@ export default function Dashboard() {
             Button: "See all",
             Link: "/admin/order-history",
         },
-
         {
             Title: "Products",
             Button: "See all & edit",

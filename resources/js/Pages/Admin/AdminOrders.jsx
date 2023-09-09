@@ -1,11 +1,18 @@
 import React from "react";
 import AdminLayout from "../../layouts/AdminLayout";
-import { Box, Container, Typography } from "@mui/material";
-import { InertiaLink } from "@inertiajs/inertia-react";
+import { Box, Container, Pagination, Typography } from "@mui/material";
+import { useState } from "react";
+import { Head, Link, router } from "@inertiajs/react";
 
-export default function AdminOrders() {
+export default function AdminOrders({ orders }) {
+    const [currentPage, setCurrentPage] = useState(orders.current_page);
+    const handleChange = (event, page) => {
+        setCurrentPage(page);
+        router.get(`order-history?page=${page}`);
+    };
     return (
         <AdminLayout heading={"Order History"}>
+            <Head title="Order History" />
             <Container>
                 <Box
                     sx={{
@@ -16,40 +23,44 @@ export default function AdminOrders() {
                         minHeight: "80vh",
                     }}
                 >
-                    <Box
-                        sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                            p: 2,
-                            my: 2,
-                            backgroundColor: "#efefef",
-                            borderRadius: 4,
-                        }}
-                    >
-                        <InertiaLink
-                            className="inertia-link"
-                            href="/admin/single-order-history"
+                    {orders.data.map((order) => (
+                        <Box
+                            sx={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                                p: 2,
+                                my: 2,
+                                backgroundColor: "#efefef",
+                                borderRadius: 4,
+                            }}
                         >
-                            <Typography fontSize={14}>
-                                HinThar education
-                            </Typography>
-                        </InertiaLink>
-                        <InertiaLink>shipped</InertiaLink>
-                    </Box>
+                            <Link
+                                className="inertia-link"
+                                href={route("adminSingleOrder", order.id)}
+                            >
+                                <Typography fontSize={14}>
+                                    {order.user.name}
+                                </Typography>
+                            </Link>
+                            <Link href={route("adminSingleOrder", order.id)}>
+                                {order.status}
+                            </Link>
+                        </Box>
+                    ))}
                     <Box
                         sx={{
                             display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                            p: 2,
-                            my: 2,
-                            backgroundColor: "#efefef",
-                            borderRadius: 4,
+                            justifyContent: "center",
+                            my: 3,
                         }}
                     >
-                        <Typography fontSize={14}>Inv-1234567890</Typography>
-                        <InertiaLink>delivered</InertiaLink>
+                        <Pagination
+                            count={orders.last_page}
+                            page={currentPage}
+                            onChange={handleChange}
+                            variant="contained"
+                        />
                     </Box>
                 </Box>
             </Container>

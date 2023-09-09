@@ -25,32 +25,36 @@ export default function SingleProduct(props) {
         e.preventDefault();
         post(route("addToCart"), data);
     };
-    console.log(data);
     return (
         <AccountLayout>
             <Head title={product.product_name} />
             <Container maxWidth="xs">
-                <Carousel
-                    dynamicHeight={true}
-                    infiniteLoop={true}
-                    showThumbs={false}
-                >
-                    {product.images.map((image, index) => (
-                        <Box
-                            sx={{
-                                borderRadius: 3,
-                                overflow: "hidden",
-                            }}
-                            key={index}
-                        >
-                            <img src={`/storage/images/products/${image}`} />
-                        </Box>
-                    ))}
-                </Carousel>
+                <Box mb={2}>
+                    <Carousel
+                        dynamicHeight={true}
+                        infiniteLoop={true}
+                        showThumbs={false}
+                    >
+                        {product.images.map((image, index) => (
+                            <Box
+                                sx={{
+                                    borderRadius: 3,
+                                    overflow: "hidden",
+                                }}
+                                key={index}
+                            >
+                                <img
+                                    src={`/storage/images/products/${image}`}
+                                />
+                            </Box>
+                        ))}
+                    </Carousel>
+                </Box>
                 <Divider />
                 <Box
                     sx={{
-                        my: 2,
+                        mt: 2,
+                        mb: 5,
                         display: "flex",
                         gap: 2,
                         flexDirection: "column",
@@ -91,12 +95,13 @@ export default function SingleProduct(props) {
             </Container>
             <Box
                 sx={{
-                    position: "sticky",
+                    position: "fixed",
                     bottom: 0,
                     left: 0,
                     width: "100%",
                     zIndex: 1,
                     bgcolor: "#dedede",
+                    opacity: "90%",
                 }}
             >
                 <Box
@@ -117,6 +122,7 @@ export default function SingleProduct(props) {
                         variant="contained"
                         fullWidth
                         onClick={handleAddToCart}
+                        disabled={processing}
                     >
                         Order Now
                     </Button>

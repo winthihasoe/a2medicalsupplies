@@ -61,6 +61,42 @@ export default function AddProduct(props) {
         <AdminLayout heading={"Add New Product"}>
             <Head title="Add new product" />
             <Container maxWidth="md">
+                {categories.length == 0 ? (
+                    <Typography fontSize={12} align="center" mb={1}>
+                        There is no category. Add new first
+                    </Typography>
+                ) : (
+                    <Box mb={2}>
+                        <Typography fontSize={10} mb={1}>
+                            Select a category first:
+                        </Typography>
+                        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
+                            {categories.map((category) => (
+                                <Chip
+                                    key={category.id}
+                                    label={category.category_name}
+                                    size="small"
+                                    onClick={() =>
+                                        setData({
+                                            ...data,
+                                            category: category.category_name,
+                                        })
+                                    }
+                                    style={{
+                                        backgroundColor:
+                                            data.category ===
+                                            category.category_name
+                                                ? "orange" // Change this to the desired color
+                                                : "", // Default color for unselected chips
+                                    }}
+                                />
+                            ))}
+                        </Box>
+                    </Box>
+                )}
+                <Box align="center">
+                    <CreateCategoryModal />
+                </Box>
                 <Box
                     sx={{
                         height: 200,
@@ -174,31 +210,7 @@ export default function AddProduct(props) {
                             />
                         </Box>
                         <Divider />
-                        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
-                            {categories.map((category) => (
-                                <Chip
-                                    key={category.id}
-                                    label={category.category_name}
-                                    size="small"
-                                    onClick={() =>
-                                        setData({
-                                            ...data,
-                                            category: category.category_name,
-                                        })
-                                    }
-                                    style={{
-                                        backgroundColor:
-                                            data.category ===
-                                            category.category_name
-                                                ? "orange" // Change this to the desired color
-                                                : "", // Default color for unselected chips
-                                    }}
-                                />
-                            ))}
-                        </Box>
-                        <Box align="center">
-                            <CreateCategoryModal />
-                        </Box>
+
                         <Divider />
 
                         <Box>
