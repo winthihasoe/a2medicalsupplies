@@ -1,19 +1,17 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DrugApiController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
+//Public routes
+Route::post('/v1/register', [AuthController::class, 'register']);
+Route::post('/v1/login', [AuthController::class, 'login']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+//Protected routes
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('/v1/logout', [AuthController::class, 'logout']);
+    Route::apiResource('/v1/drugs', DrugApiController::class);
+    Route::get('/v1/user', [UserController::class, 'user']);
 });

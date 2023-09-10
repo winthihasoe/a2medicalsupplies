@@ -21,6 +21,21 @@ export default function SuccessOrder() {
                         Go to Home
                     </Button>
                 </Box>
+                <Box
+                    sx={{
+                        my: 2,
+                    }}
+                >
+                    <Button
+                        onClick={() => router.visit(route("userOrders"))}
+                        variant="contained"
+                        color="secondary"
+                        size="small"
+                        fullWidth
+                    >
+                        See my orders
+                    </Button>
+                </Box>
                 <Typography fontSize={10}>
                     Thank you for shopping with us!
                 </Typography>

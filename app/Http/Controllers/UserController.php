@@ -95,4 +95,11 @@ class UserController extends Controller
 
         return redirect('/');
     }
+
+
+    // This is from API
+    function user (Request $request){
+        return $request->user();       
+    }
+
 }

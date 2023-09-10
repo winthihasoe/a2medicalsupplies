@@ -12,8 +12,8 @@ class DrugController extends Controller
     // Show all drugs to admin
     public function index()
     {
-        return Inertia::render('Index', [
-           'drugs' => Drug::get(),
+        return Inertia::render('Admin/Drugs/AdminDrugIndex', [
+           'drugs' => Drug::all(),
         ]);
         
     }
@@ -38,35 +38,35 @@ class DrugController extends Controller
     }
 
     // Show specific drug
-    public function show(Drug $drug)
+    public function show($drugId)
     {
-        return Inertia::render('Drug', [
-            'drug'=>$drug
+        return Inertia::render('Admin/Drugs/AdminSingleDrug', [
+            'drug'=>Drug::findOrFail($drugId),
         ]);
         
     }
 
     // Editing the existing durg - show edit drug form
-    public function edit(Drug $drug)
+    public function edit($drugId)
     {
-        return Inertia::render('EditDrug', [
-            'drug'=>$drug
+        return Inertia::render('Admin/Drugs/AdminEditDrug', [
+            'drug'=>Drug::findOrFail($drugId),
         ]);
     }
 
     // Updating the existing drug -> put request
-    public function update(Request $request, $drug)
+    public function update(Request $request, $drugId)
     {
-        
-        $updateDrug = Drug::find($drug);
+        $updateDrug = Drug::findOrFail($drugId);
         $updateDrug->update($request->all());
-        return redirect(route('showDrug',[$drug]))->with('message', 'Drug was updated!');
+        return redirect(route('adminSingleDrug', $drugId))->with('success', 'Drug was updated!');
     }
 
     // Delete the existing specific drug
-    public function destroy(Drug $drug)
+    public function destroy($drugId)
     {
+        $drug = Drug::findOrFail($drugId);
         $drug->delete();
-        return Redirect::route('dashboard')->with('success', 'Drug deleted.');
+        return Redirect::route('allDrugs')->with('success', 'Drug deleted.');
     }
 }

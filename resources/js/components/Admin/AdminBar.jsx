@@ -45,6 +45,10 @@ export default function AdminBar(props) {
             Link: "adminOrders",
         },
         {
+            Title: "Drugs",
+            Link: "allDrugs",
+        },
+        {
             Title: "Users",
             Link: "dashboard",
         },

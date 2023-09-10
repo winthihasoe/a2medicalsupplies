@@ -72,23 +72,14 @@ Route::prefix('admin')->middleware(['isAdmin'])->group(function() {
     Route::post('/add-category', [CategoryController::class, 'addCategory'])->name('addCategory');
 
     //Pharmacy
+    Route::get('drugs', [DrugController::class, 'index'])->name('allDrugs');
     Route::get('add-drug', [DrugController::class, 'add']);
     Route::post('add-drug', [DrugController::class, 'store']);
-    Route::get('{drug}', [DrugController::class, 'show'])->name('showDrug');
-    Route::get('drug/{drug}', [DrugController::class, 'edit']);
-    Route::put('drug/update/{drug}', [DrugController::class, 'update']);
-    Route::delete('drug/destroy/{drug}', [DrugController::class, 'destroy'])->name('drug.destroy');
+    Route::get('{drugId}', [DrugController::class, 'show'])->name('adminSingleDrug');
+    Route::get('drug/{drugId}', [DrugController::class, 'edit'])->name('editDrug');
+    Route::put('drug/update/{drugId}', [DrugController::class, 'update'])->name('updateDrug');
+    Route::delete('drug/destroy/{drugId}', [DrugController::class, 'destroy'])->name('deleteDrug');
     
 });
-
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
 
 require __DIR__.'/auth.php';

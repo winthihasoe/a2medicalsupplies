@@ -243,7 +243,7 @@ export default function AdminSingleOrder({ order }) {
                     </Box>
                 </Grid>
             </Grid>
-            <Box px={5}>
+            <Box px={5} mb={4}>
                 <Button
                     variant="contained"
                     fullWidth

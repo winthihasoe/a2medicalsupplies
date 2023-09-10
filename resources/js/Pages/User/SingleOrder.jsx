@@ -260,7 +260,7 @@ export default function SingleOrder(props) {
                                 Your Review:
                             </Typography>
                             <Typography color="white" fontSize={13}>
-                                {data.review}
+                                <q>{data.review}</q>
                             </Typography>
                         </Box>
                     </Box>

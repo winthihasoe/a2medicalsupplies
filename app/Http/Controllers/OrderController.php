@@ -61,7 +61,7 @@ class OrderController extends Controller
             DB::commit();
 
             // return Inertia::visit(route('successOrder'))->with('success', 'Order successfully placed!');
-            return redirect()->route('successOrder')->with('success', 'Order successfully placed!');
+            return redirect()->route('successOrder')->withSuccess('success', 'Order successfully placed!');
         } catch (\Exception $e) {
             // Roll back the transaction in case of any error
             DB::rollBack();
