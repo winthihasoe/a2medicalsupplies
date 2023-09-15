@@ -48,20 +48,31 @@ export default function AdminOrders({ orders }) {
                             </Link>
                         </Box>
                     ))}
-                    <Box
-                        sx={{
-                            display: "flex",
-                            justifyContent: "center",
-                            my: 3,
-                        }}
-                    >
-                        <Pagination
-                            count={orders.last_page}
-                            page={currentPage}
-                            onChange={handleChange}
-                            variant="contained"
-                        />
-                    </Box>
+                    {orders.data.length == 0 ? (
+                        <Typography
+                            variant="h6"
+                            fontWeight={600}
+                            align="center"
+                            mt={5}
+                        >
+                            No orders right now!
+                        </Typography>
+                    ) : (
+                        <Box
+                            sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                my: 3,
+                            }}
+                        >
+                            <Pagination
+                                count={orders.last_page}
+                                page={currentPage}
+                                onChange={handleChange}
+                                variant="contained"
+                            />
+                        </Box>
+                    )}
                 </Box>
             </Container>
         </AdminLayout>

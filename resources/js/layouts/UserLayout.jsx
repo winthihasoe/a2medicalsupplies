@@ -16,8 +16,14 @@ export default function UserLayout({ children }) {
             >
                 <FlashMessage />
                 <AppBar />
-                <Container component="main" maxWidth="xs">
-                    <SearchBar />
+                <Container component="main">
+                    <Box
+                        sx={{
+                            display: { xs: "block", sm: "block", md: "none" },
+                        }}
+                    >
+                        <SearchBar />
+                    </Box>
                     {children}
                 </Container>
             </Box>

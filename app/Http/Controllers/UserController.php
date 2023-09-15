@@ -102,4 +102,13 @@ class UserController extends Controller
         return $request->user();       
     }
 
+    // Show all user to super-admin middleware
+    public function allUsers()
+    {
+        $users = User::select('name', 'email', 'phone')->get();
+        return Inertia::render('Admin/Users', [ 
+            'users' => $users,
+        ]);
+    }
+
 }

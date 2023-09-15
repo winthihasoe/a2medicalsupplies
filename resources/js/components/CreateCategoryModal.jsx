@@ -44,7 +44,6 @@ export default function CreateCategoryModal() {
         e.preventDefault();
         post(route("addCategory"), data);
     };
-    console.log(data);
     return (
         <Box>
             <Button

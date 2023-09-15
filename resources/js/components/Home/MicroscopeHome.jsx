@@ -16,6 +16,7 @@ export default function MicroscopeHome() {
                     "linear-gradient(211deg, #FFF 0%, rgba(210, 209, 209, 0.82) 97.73%)",
                 overflow: "hidden",
                 cursor: "pointer",
+                margin: "0 auto",
             }}
             onClick={() => router.get(route("microscope"))}
         >

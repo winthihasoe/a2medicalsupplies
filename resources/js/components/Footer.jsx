@@ -9,7 +9,8 @@ export default function Footer() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                mt: 2,
+                mt: 3,
+                mb: 2,
             }}
         >
             <Box

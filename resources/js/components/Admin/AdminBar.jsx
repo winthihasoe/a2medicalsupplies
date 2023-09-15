@@ -14,7 +14,7 @@ import {
 import React, { useState } from "react";
 import FormatAlignLeftRoundedIcon from "@mui/icons-material/FormatAlignLeftRounded";
 import BackButton from "../BackButton";
-import { Link, usePage } from "@inertiajs/react";
+import { Link, router, usePage } from "@inertiajs/react";
 
 export default function AdminBar(props) {
     const user = usePage().props.auth;
@@ -23,6 +23,7 @@ export default function AdminBar(props) {
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
     };
+
     const MenuList = [
         {
             Title: "Home",
@@ -38,7 +39,7 @@ export default function AdminBar(props) {
         },
         {
             Title: "Products",
-            Link: "dashboard",
+            Link: "adminProducts",
         },
         {
             Title: "Orders",
@@ -50,7 +51,7 @@ export default function AdminBar(props) {
         },
         {
             Title: "Users",
-            Link: "dashboard",
+            Link: "allUsers",
         },
     ];
     return (
@@ -109,25 +110,33 @@ export default function AdminBar(props) {
                             <List>
                                 {MenuList.map((Menu) => (
                                     <ListItem key={Menu.Title}>
-                                        <Link
-                                            href={route(Menu.Link)}
-                                            className="inertia-link"
-                                            as="div"
+                                        <Box
+                                            sx={{
+                                                width: 140,
+                                                p: 2,
+                                                mt: 1,
+                                                borderRadius: 3,
+                                                cursor: "pointer",
+                                            }}
+                                            bgcolor={
+                                                route().current(Menu.Link)
+                                                    ? "orange"
+                                                    : "#dedede"
+                                            }
+                                            onClick={() => {
+                                                router.get(route(Menu.Link));
+                                            }}
                                         >
-                                            <Box
-                                                sx={{
-                                                    backgroundColor: "#efefef",
-                                                    width: 140,
-                                                    p: 2,
-                                                    mt: 1,
-                                                    borderRadius: 3,
-                                                }}
+                                            <Typography
+                                                color={
+                                                    route().current(Menu.Link)
+                                                        ? "white"
+                                                        : "black"
+                                                }
                                             >
-                                                <Typography>
-                                                    {Menu.Title}
-                                                </Typography>
-                                            </Box>
-                                        </Link>
+                                                {Menu.Title}
+                                            </Typography>
+                                        </Box>
                                     </ListItem>
                                 ))}
                                 <ListItem>

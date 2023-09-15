@@ -14,6 +14,7 @@ export default function SkeletonHome() {
                 backgroundColor: "#f6eded",
                 overflow: "hidden",
                 display: "flex",
+                cursor: "pointer",
             }}
             onClick={() => router.get(route("skeleton"))}
         >

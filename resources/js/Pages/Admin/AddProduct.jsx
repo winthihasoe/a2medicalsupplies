@@ -56,7 +56,6 @@ export default function AddProduct(props) {
         e.preventDefault();
         post(route("storeProduct"), data);
     };
-    console.log(data);
     return (
         <AdminLayout heading={"Add New Product"}>
             <Head title="Add new product" />

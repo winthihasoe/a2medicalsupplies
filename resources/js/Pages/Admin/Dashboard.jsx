@@ -1,30 +1,29 @@
 import React from "react";
 import AdminLayout from "../../layouts/AdminLayout";
 import { Box, Container, Divider, Typography } from "@mui/material";
-import { InertiaLink } from "@inertiajs/inertia-react";
-import { Head } from "@inertiajs/react";
+import { Head, Link, router } from "@inertiajs/react";
 
-export default function Dashboard() {
+export default function Dashboard({ stockList }) {
     const DashboardMenu = [
         {
             Title: "Order History",
             Button: "See all",
-            Link: "/admin/order-history",
+            Link: "adminOrders",
         },
         {
             Title: "Products",
             Button: "See all & edit",
-            Link: "/admin/products",
+            Link: "adminProducts",
         },
         {
-            Title: "About",
-            Button: "Edit",
-            Link: "#",
+            Title: "Drugs",
+            Button: "See all & edit",
+            Link: "allDrugs",
         },
         {
             Title: "All Users",
             Button: "See all",
-            Link: "#",
+            Link: "allUsers",
         },
     ];
     return (
@@ -38,70 +37,37 @@ export default function Dashboard() {
                         borderRadius: 5,
                         p: 2,
                         my: 2,
-                        minHeight: 300,
+                        height: 400,
+                        overflowY: "auto",
                     }}
                 >
                     <Typography fontSize={22} gutterBottom>
                         Stock list
                     </Typography>
-                    <Box
-                        sx={{
-                            backgroundColor: "#e3e3e3",
-                            p: 2,
-                            borderRadius: 3,
-                            my: 2,
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                        }}
-                    >
-                        <Typography fontWeight={600}>
-                            Nursing Manikin
-                        </Typography>
-                        <Typography>8 pc</Typography>
-                    </Box>
-                    <Box
-                        sx={{
-                            backgroundColor: "#e3e3e3",
-                            p: 2,
-                            borderRadius: 3,
-                            my: 2,
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                        }}
-                    >
-                        <Typography fontWeight={600}>Microscope</Typography>
-                        <Typography>2 pc</Typography>
-                    </Box>
-                    <Box
-                        sx={{
-                            backgroundColor: "#e3e3e3",
-                            p: 2,
-                            borderRadius: 3,
-                            my: 2,
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                        }}
-                    >
-                        <Typography fontWeight={600}>3' Skeleton</Typography>
-                        <Typography>2 pc</Typography>
-                    </Box>
-                    <Box
-                        sx={{
-                            backgroundColor: "#e3e3e3",
-                            p: 2,
-                            borderRadius: 3,
-                            my: 2,
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                        }}
-                    >
-                        <Typography fontWeight={600}>Injection Arm</Typography>
-                        <Typography>2 pc</Typography>
-                    </Box>
+                    {stockList.map((stock) => (
+                        <Box
+                            sx={{
+                                backgroundColor: "#e3e3e3",
+                                p: 2,
+                                borderRadius: 3,
+                                my: 2,
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                                cursor: "pointer",
+                            }}
+                            onClick={() =>
+                                router.get(
+                                    route("adminSingleProduct", stock.id)
+                                )
+                            }
+                        >
+                            <Typography fontWeight={600}>
+                                {stock.product_name}
+                            </Typography>
+                            <Typography>{stock.stock} pc</Typography>
+                        </Box>
+                    ))}
                 </Box>
                 {DashboardMenu.map((Menu) => (
                     <Box>
@@ -115,9 +81,7 @@ export default function Dashboard() {
                             }}
                         >
                             <Typography fontSize={22}>{Menu.Title}</Typography>
-                            <InertiaLink href={Menu.Link}>
-                                {Menu.Button}
-                            </InertiaLink>
+                            <Link href={route(Menu.Link)}>{Menu.Button}</Link>
                         </Box>
                         <Divider />
                     </Box>

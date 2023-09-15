@@ -13,7 +13,8 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import FormatAlignLeftRoundedIcon from "@mui/icons-material/FormatAlignLeftRounded";
-import { Link, usePage } from "@inertiajs/react";
+import { Link, router, usePage } from "@inertiajs/react";
+import SearchBar from "./SearchBar";
 
 export default function AppBar() {
     const user = usePage().props.auth;
@@ -24,15 +25,19 @@ export default function AppBar() {
     const MenuList = [
         {
             Title: "Home",
-            Link: "/",
+            Link: "home",
         },
         {
             Title: "Cart",
-            Link: "/cart",
+            Link: "showCart",
         },
         {
             Title: "Account",
-            Link: "/account",
+            Link: "account",
+        },
+        {
+            Title: "My Order",
+            Link: "userOrders",
         },
     ];
     return (
@@ -55,9 +60,27 @@ export default function AppBar() {
                     </Link>
                 </Typography>
 
-                <IconButton onClick={toggleSidebar} sx={{ zIndex: 1 }}>
-                    <FormatAlignLeftRoundedIcon />
-                </IconButton>
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        gap: 3,
+                    }}
+                >
+                    <Box
+                        sx={{
+                            display: { xs: "none", sm: "none", md: "block" },
+                            zIndex: 1,
+                        }}
+                    >
+                        <SearchBar />
+                    </Box>
+
+                    <IconButton onClick={toggleSidebar} sx={{ zIndex: 1 }}>
+                        <FormatAlignLeftRoundedIcon />
+                    </IconButton>
+                </Box>
                 <Drawer
                     anchor="right"
                     open={sidebarOpen}
@@ -92,28 +115,31 @@ export default function AppBar() {
                             <List>
                                 {MenuList.map((Menu) => (
                                     <ListItem key={Menu.Title}>
-                                        <Link
-                                            href={Menu.Link}
-                                            className="inertia-link"
-                                            as="div"
+                                        <Box
+                                            sx={{
+                                                width: 140,
+                                                p: 2,
+                                                mt: 1,
+                                                borderRadius: 3,
+                                                cursor: "pointer",
+                                            }}
+                                            bgcolor={
+                                                route().current(Menu.Link)
+                                                    ? "orange"
+                                                    : "#efefef"
+                                            }
+                                            onClick={() =>
+                                                router.get(route(Menu.Link))
+                                            }
                                         >
-                                            <Box
-                                                sx={{
-                                                    backgroundColor: "#efefef",
-                                                    width: 140,
-                                                    p: 2,
-                                                    mt: 1,
-                                                    borderRadius: 3,
-                                                }}
-                                            >
-                                                <Typography>
-                                                    {Menu.Title}
-                                                </Typography>
-                                            </Box>
-                                        </Link>
+                                            <Typography>
+                                                {Menu.Title}
+                                            </Typography>
+                                        </Box>
                                     </ListItem>
                                 ))}
-                                {user.user.is_admin == 1 && (
+                                {user.user.is_admin == 1 ||
+                                user.user.is_editor == 1 ? (
                                     <ListItem>
                                         <Link
                                             className="inertia-link"
@@ -135,6 +161,8 @@ export default function AppBar() {
                                             </Box>
                                         </Link>
                                     </ListItem>
+                                ) : (
+                                    ""
                                 )}
                                 <ListItem>
                                     <Link

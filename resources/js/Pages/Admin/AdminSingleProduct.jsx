@@ -9,15 +9,16 @@ import {
     TextField,
     Typography,
     Modal,
+    Chip,
 } from "@mui/material";
 import ProductDescriptionEditor from "../../components/ProductDescriptionEditor";
 import { Head, router, useForm } from "@inertiajs/react";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
-import { asset } from "@inertiajs/inertia";
 import { useState } from "react";
 
 export default function AdminSingleProduct(props) {
     const product = props.product;
+    const categories = props.categories;
     const {
         data,
         setData,
@@ -220,6 +221,39 @@ export default function AdminSingleProduct(props) {
                             onChange={handleChange}
                             name="price"
                         />
+                    </Box>
+
+                    <Box>
+                        <Typography fontSize={12}>Stock:</Typography>
+                        <TextField
+                            size="small"
+                            fullWidth
+                            type="number"
+                            value={data.stock}
+                            onChange={handleChange}
+                            name="stock"
+                        />
+                    </Box>
+
+                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+                        {categories.map((category) => (
+                            <Chip
+                                key={category.id}
+                                color={
+                                    data.category == category.category_name
+                                        ? "primary"
+                                        : "secondary"
+                                }
+                                size="small"
+                                label={category.category_name}
+                                onClick={() =>
+                                    setData({
+                                        ...data,
+                                        category: category.category_name,
+                                    })
+                                }
+                            />
+                        ))}
                     </Box>
 
                     <Box>

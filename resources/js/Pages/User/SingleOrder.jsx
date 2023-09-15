@@ -87,11 +87,14 @@ export default function SingleOrder(props) {
                         }}
                     >
                         <Typography fontSize={12}>
-                            Customer: <b>{order.user.name}</b>
+                            Customer:{" "}
+                            <b>
+                                {order.customer_name
+                                    ? order.customer_name
+                                    : order.user.name}
+                            </b>
                         </Typography>
-                        <Typography fontSize={12}>
-                            Invoice no: {order.order_number}
-                        </Typography>
+
                         <Typography fontSize={12}></Typography>
                         <Typography fontSize={12}>
                             Address: <i>{order.address}</i>
@@ -113,10 +116,12 @@ export default function SingleOrder(props) {
                         <ApplicationLogo />
                     </Box>
                 </Box>
+                <Typography align="right" fontSize={12} mt={1}>
+                    Invoice no: {order.order_number}
+                </Typography>
                 <Box
                     sx={{
                         border: "1px solid #e3e3e3",
-                        my: 3,
                         borderRadius: 2,
                         width: "100%",
                     }}
@@ -135,12 +140,12 @@ export default function SingleOrder(props) {
                                             Price
                                         </Typography>
                                     </TableCell>
-                                    <TableCell align="left">
+                                    <TableCell align="center">
                                         <Typography fontSize={11}>
                                             Qty.
                                         </Typography>
                                     </TableCell>
-                                    <TableCell align="left">
+                                    <TableCell align="right">
                                         <Typography fontSize={11}>
                                             Amount
                                         </Typography>
@@ -216,15 +221,22 @@ export default function SingleOrder(props) {
                                 </TableRow>
                             </TableBody>
                         </Table>
-                        <Typography fontSize={11} align="center" my={3}>
-                            Thank you for shopping with us. Items sold are not
-                            exchangable.
+                        <Typography
+                            fontSize={13}
+                            fontWeight={600}
+                            align="center"
+                            mt={3}
+                        >
+                            Thank you for shopping with us.
+                        </Typography>
+                        <Typography fontSize={11} align="center" mb={3}>
+                            <i>Items sold are not exchangable.</i>
                         </Typography>
                     </TableContainer>
                 </Box>
                 <Box
                     sx={{
-                        my: 4,
+                        my: 2,
                         border: "1px solid #e3e3e3",
                         borderRadius: 2,
                         display: "flex",

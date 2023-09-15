@@ -14,12 +14,35 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PageController::class, 'index'])->name('home');
+
+// Search everything in UserLayout
+Route::get('/search-products-drugs', [PageController::class, 'searchEverything'])->name('searchEverything');
+
 Route::get('/manikins', [PageController::class, 'manikins'])->name('manikins');
 Route::get('/cpr', [PageController::class, 'cpr'])->name('cpr');
 Route::get('/skeleton', [PageController::class, 'skeleton'])->name('skeleton');
 Route::get('/microscope', [PageController::class, 'microscope'])->name('microscope');
 Route::get('/aesthetic', [PageController::class, 'aesthetic'])->name('aesthetic');
-// Route::get('/product-detail', [ProductController::class, 'productDetail'])->name('productDetail');
+Route::get('/arm-iv-practice', [PageController::class, 'injectionArm'])->name('injectionArm');
+Route::get('/et-tube-practice', [PageController::class, 'etTube'])->name('etTube');
+Route::get('/anatomy-torso', [PageController::class, 'anatomy'])->name('anatomy');
+Route::get('/heart', [PageController::class, 'heart'])->name('heart');
+Route::get('/ovary', [PageController::class, 'ovary'])->name('ovary');
+Route::get('/buttock-im-practice', [PageController::class, 'buttock'])->name('buttock');
+Route::get('/delivery-practice', [PageController::class, 'delivery'])->name('delivery');
+Route::get('/posters', [PageController::class, 'posters'])->name('posters');
+Route::get('/skull', [PageController::class, 'skull'])->name('skull');
+Route::get('/skin', [PageController::class, 'skin'])->name('skin');
+Route::get('/pregnancy', [PageController::class, 'pregnancy'])->name('pregnancy');
+Route::get('/cervical', [PageController::class, 'cervical'])->name('cervical');
+Route::get('/breast', [PageController::class, 'breast'])->name('breast');
+Route::get('/needle', [PageController::class, 'needle'])->name('needle');
+Route::get('/suture-kit', [PageController::class, 'suture'])->name('suture');
+Route::get('/dressing-box', [PageController::class, 'dressing'])->name('dressing');
+Route::get('/surgical-marker-pen', [PageController::class, 'pen'])->name('pen');
+
+// Show single product for user
+Route::get('/single-product/{productId}', [ProductController::class, 'singleProduct'])->name('singleProduct');
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/cart', [CartController::class, 'addToCart'])->name('addToCart');
@@ -41,11 +64,9 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/review-by-customer/{orderId}', [OrderController::class, 'reviewByCustomer'])->name('reviewByCustomer');
     Route::put('delete-review/{orderId}', [OrderController::class, 'deleteReview'])->name('deleteReview');
     
-    // Show single product for user
-    Route::get('/single-product/{productId}', [ProductController::class, 'singleProduct'])->name('singleProduct');
 });
 
-Route::prefix('admin')->middleware(['isAdmin'])->group(function() {
+Route::prefix('admin')->middleware(['isEditor'])->group(function() {
     Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
 
     Route::get('/order-history', [OrderController::class, 'adminOrders'])->name('adminOrders');
@@ -80,6 +101,11 @@ Route::prefix('admin')->middleware(['isAdmin'])->group(function() {
     Route::put('drug/update/{drugId}', [DrugController::class, 'update'])->name('updateDrug');
     Route::delete('drug/destroy/{drugId}', [DrugController::class, 'destroy'])->name('deleteDrug');
     
+});
+
+Route::prefix('super-admin')->middleware(['isAdmin'])->group(function() {
+    Route::get('/users', [UserController::class, 'allUsers'])->name('allUsers');
+
 });
 
 require __DIR__.'/auth.php';

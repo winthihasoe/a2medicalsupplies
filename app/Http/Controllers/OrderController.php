@@ -31,6 +31,7 @@ class OrderController extends Controller
             $order = new Order();
             $order->user_id = $user->id;
             $order->total_amount = $request->totalAmount;
+            $order->customer_name = $request->customer_name;
             $order->status = 'pending';
             $order->address = $address;
             $order->save();
@@ -139,7 +140,7 @@ class OrderController extends Controller
         $updateOrder = Order::findOrFail($orderId);
         $updateOrder->status = $request->status;
         $updateOrder->save();
-        return redirect()->back()->with('success', 'Order status updated successfully');
+        return redirect()->route('adminOrders')->with('success', 'Order status updated successfully');
 
     }
     

@@ -78,7 +78,7 @@ export default function SingleProduct(props) {
                         <NumberWithComma value={product.price} /> Ks
                     </Typography>
                     <Divider />
-                    <Box>
+                    <Box mb={4}>
                         <Typography>Description</Typography>
                         <Typography
                             px={1}
