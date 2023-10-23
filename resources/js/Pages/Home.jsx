@@ -190,7 +190,7 @@ export default function Home() {
                             sx={{ textIndent: 25 }}
                         >
                             Transform your teaching methods with our engaging
-                            platform.
+                            models.
                         </Typography>
                         <Typography
                             fontSize={14}
@@ -198,7 +198,7 @@ export default function Home() {
                             sx={{ textIndent: 25 }}
                         >
                             Perfect your skills and build confidence before
-                            stepping into the clinic.
+                            stepping into the job.
                         </Typography>
                     </Box>
                 </Box>

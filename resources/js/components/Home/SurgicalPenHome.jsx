@@ -27,7 +27,7 @@ export default function SurgicalPenHome() {
                 width="70%"
             >
                 <Typography fontSize={18} p={2} align="center" fontWeight={600}>
-                    Surgical Marker pen & eraser
+                    Surgical Marker Pen & Eraser
                 </Typography>
             </Box>
             <Box

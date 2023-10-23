@@ -89,8 +89,10 @@ Route::prefix('admin')->middleware(['isEditor'])->group(function() {
     // Delete single product image when admin press the delete icon
     Route::delete('/single-product/{removeImageName}', [ProductController::class, 'removeProductImage'])->name('removeProductImage');
 
-    // Category 
-    Route::post('/add-category', [CategoryController::class, 'addCategory'])->name('addCategory');
+    // Category
+    Route::get('/add-category', [CategoryController::class, 'createCategory'])->name('createCategory'); // route for showing create category form
+    Route::post('/add-category', [CategoryController::class, 'addCategory'])->name('addCategory'); // route for create new category
+    Route::delete('/delete-category/{categoryId}', [CategoryController::class, 'deleteCategory'])->name('deleteCategory'); // route for delete category
 
     //Pharmacy
     Route::get('drugs', [DrugController::class, 'index'])->name('allDrugs');
@@ -105,7 +107,8 @@ Route::prefix('admin')->middleware(['isEditor'])->group(function() {
 
 Route::prefix('super-admin')->middleware(['isAdmin'])->group(function() {
     Route::get('/users', [UserController::class, 'allUsers'])->name('allUsers');
-
+    Route::get('/users/{userId}', [UserController::class, 'showUser'])->name('showUser');
+    Route::put('/users/{userId}', [UserController::class, 'updateRole'])->name('updateRole');
 });
 
 require __DIR__.'/auth.php';

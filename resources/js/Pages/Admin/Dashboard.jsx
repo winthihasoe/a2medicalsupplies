@@ -21,6 +21,11 @@ export default function Dashboard({ stockList }) {
             Link: "allDrugs",
         },
         {
+            Title: "Add New Category",
+            Button: "add",
+            Link: "createCategory",
+        },
+        {
             Title: "All Users",
             Button: "See all",
             Link: "allUsers",

@@ -133,7 +133,7 @@ class PageController extends Controller
    // Arm IV practice 
    public function injectionArm()
    {
-    $products = Product::where('category', 'LIKE', '%'.'Arm IV'.'%')->get();
+    $products = Product::where('category', 'LIKE', '%'.'Arm'.'%')->get();
     return Inertia::render('ProductList', [
         'products' => $products,
     ]);

@@ -29,7 +29,7 @@ export default function Profile(props) {
         e.preventDefault();
         post(route("updateUser", user.id), data);
     };
-    console.log(user);
+    console.log(errors);
 
     return (
         <AccountLayout>
@@ -123,14 +123,9 @@ export default function Profile(props) {
                                 value={data.current_password}
                                 onChange={handleChange}
                             />
-                            {errors.current_password && (
-                                <Typography fontSize={12}>
-                                    {errors.current_password}
-                                </Typography>
-                            )}
                         </Box>
                         <Box>
-                            <Typography fontSize={12}>Password:</Typography>
+                            <Typography fontSize={12}>New Password:</Typography>
                             <TextField
                                 size="small"
                                 name="password"
@@ -138,11 +133,6 @@ export default function Profile(props) {
                                 value={data.password}
                                 onChange={handleChange}
                             />
-                            {errors.current_password && (
-                                <Typography fontSize={12}>
-                                    {errors.password}
-                                </Typography>
-                            )}
                         </Box>
                         <Box>
                             <Typography fontSize={12}>
@@ -155,11 +145,11 @@ export default function Profile(props) {
                                 value={data.password_confirmation}
                                 onChange={handleChange}
                             />
-                            {errors.current_password && (
-                                <Typography fontSize={12}>
-                                    {errors.password_confirmation}
-                                </Typography>
-                            )}
+                        </Box>
+                        <Box>
+                            <Typography fontSize={12} color="red">
+                                {errors.password}
+                            </Typography>
                         </Box>
                         <Box width="100%" align="center">
                             <Button

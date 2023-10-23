@@ -1,11 +1,10 @@
 import BackButton from "@/Components/BackButton";
 import UserLayout from "@/Layouts/UserLayout";
-import { Link } from "@inertiajs/inertia-react";
 import { Box, Chip, Container, Divider, Typography } from "@mui/material";
 import MedicalInformationRoundedIcon from "@mui/icons-material/MedicalInformationRounded";
 import StorefrontRoundedIcon from "@mui/icons-material/StorefrontRounded";
 import React from "react";
-import { Head } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 
 export default function SearchResult({ results, keywords }) {
     return (

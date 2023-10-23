@@ -105,10 +105,43 @@ class UserController extends Controller
     // Show all user to super-admin middleware
     public function allUsers()
     {
-        $users = User::select('name', 'email', 'phone')->get();
+        $users = User::select('id', 'name', 'email', 'phone', 'is_admin', 'is_editor')->get();
         return Inertia::render('Admin/Users', [ 
             'users' => $users,
         ]);
+    }
+    
+    // Show all user to super-admin middleware
+    public function showUser($userId)
+    {
+        $user = User::findOrFail($userId);
+        return Inertia::render('Admin/UserDetail', [ 
+            'user' => $user,
+        ]);
+    }
+
+    // update role for the specific user
+    public function updateRole($userId, Request $request)
+    {
+        $updateRole = User::findOrFail($userId);
+
+        $request->validate([
+            'is_admin'=>'required',
+            'is_editor'=>'required',
+            
+        ]);
+
+        try {
+            $updateRole->update([
+                'is_admin'=>$request->is_admin,
+                'is_editor'=>$request->is_editor,
+            ]);
+            return redirect()->route('allUsers')->with('success', "User's role updated");
+        } catch(\Exception $e) {
+            return back()->with('error', 'Update role failed!');
+        }
+
+
     }
 
 }

@@ -15,10 +15,12 @@ class EditorMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(auth()->user()->is_editor == 1 || auth()->user()->is_admin == 1) {
-            return $next($request);
+        if(auth()->check()) {
+            if(auth()->user()->is_editor == 1 || auth()->user()->is_admin == 1) {
+                return $next($request);
+            }
         }
 
-        return back();
+        return redirect('/');
     }
 }

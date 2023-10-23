@@ -1,6 +1,6 @@
 import ProductDescriptionEditor from "@/components/ProductDescriptionEditor";
 import AdminLayout from "@/layouts/AdminLayout";
-import { Head, useForm, useRemember } from "@inertiajs/react";
+import { Head, Link, useForm, useRemember } from "@inertiajs/react";
 import {
     Box,
     Button,
@@ -14,7 +14,6 @@ import {
 import React from "react";
 import { useState } from "react";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
-import CreateCategoryModal from "@/components/CreateCategoryModal";
 
 export default function AddProduct(props) {
     const categories = props.categories;
@@ -56,6 +55,7 @@ export default function AddProduct(props) {
         e.preventDefault();
         post(route("storeProduct"), data);
     };
+
     return (
         <AdminLayout heading={"Add New Product"}>
             <Head title="Add new product" />
@@ -93,9 +93,7 @@ export default function AddProduct(props) {
                         </Box>
                     </Box>
                 )}
-                <Box align="center">
-                    <CreateCategoryModal />
-                </Box>
+
                 <Box
                     sx={{
                         height: 200,

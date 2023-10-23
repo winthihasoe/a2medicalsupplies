@@ -25,6 +25,7 @@ export default function SingleProduct(props) {
         e.preventDefault();
         post(route("addToCart"), data);
     };
+    console.log(product);
     return (
         <AccountLayout>
             <Head title={product.product_name} />
@@ -84,8 +85,7 @@ export default function SingleProduct(props) {
                             px={1}
                             fontSize={13}
                             dangerouslySetInnerHTML={{
-                                __html: product.description.replace(
-                                    /<img/g,
+                                __html: product.description?.replace(
                                     '<img style="max-width: 80%; height: auto;"'
                                 ),
                             }}

@@ -95,9 +95,11 @@ export default function SingleOrder(props) {
                             </b>
                         </Typography>
 
-                        <Typography fontSize={12}></Typography>
                         <Typography fontSize={12}>
                             Address: <i>{order.address}</i>
+                        </Typography>
+                        <Typography fontSize={12}>
+                            Order status: {order.status}
                         </Typography>
                     </Box>
                     <Box

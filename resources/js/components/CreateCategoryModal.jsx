@@ -43,6 +43,7 @@ export default function CreateCategoryModal() {
     const handleSubmit = (e) => {
         e.preventDefault();
         post(route("addCategory"), data);
+        setOpen(false);
     };
     return (
         <Box>
