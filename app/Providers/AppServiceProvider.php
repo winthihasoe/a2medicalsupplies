@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,9 +17,11 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap any application services.
+     * Schema::defaultStringLength(191); This line is add because of an error when migrating file
+     * 
      */
     public function boot(): void
     {
-        //
+        Schema::defaultStringLength(191);
     }
 }
