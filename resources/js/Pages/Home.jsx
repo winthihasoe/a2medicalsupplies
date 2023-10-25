@@ -30,10 +30,9 @@ import DressingBoxHome from "@/components/Home/DressingBoxHome";
 import SurgicalPenHome from "@/components/Home/SurgicalPenHome";
 
 export default function Home() {
-    return (
-        <UserLayout>
-            <Head title="Home" />
-
+    const sections = [
+        // Manikins, Cpr, Skeleton, microscope
+        <section>
             <Typography
                 color="#ababab"
                 fontSize={{ xs: 17, sm: 17, md: 22 }}
@@ -76,8 +75,10 @@ export default function Home() {
                     <MicroscopeHome />
                 </Box>
             </Box>
+        </section>,
 
-            {/* Practicing model section  */}
+        //  Practicing model section
+        <section>
             <Container maxWidth="md">
                 <Typography
                     fontSize={30}
@@ -107,7 +108,11 @@ export default function Home() {
                     <Box
                         width="40%"
                         sx={{
-                            display: { xs: "none", sm: "none", md: "block" },
+                            display: {
+                                xs: "none",
+                                sm: "none",
+                                md: "block",
+                            },
                         }}
                     >
                         <Typography
@@ -144,7 +149,6 @@ export default function Home() {
                     <InjectionArm />
                 </Box>
             </Container>
-
             <Container maxWidth="sm">
                 <Box
                     sx={{
@@ -245,59 +249,99 @@ export default function Home() {
                     </Grid>
                 </Grid>
             </Container>
+        </section>,
 
+        <section>
             {/* Demostration model section  */}
             <Typography
                 fontSize={22}
                 color="orange"
                 fontWeight={600}
                 align="center"
-                mt={8}
-                mb={5}
+                my={4}
             >
                 Demostration Models
             </Typography>
 
-            <Container maxWidth="xs">
-                <Grid container columnSpacing={1.5}>
-                    <Grid item xs={6}>
-                        <AnatomyHome />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Grid container direction="column" rowSpacing={2}>
-                            <Grid item>
-                                <HeartHome />
+            <Container maxWidth="md">
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        gap: 4,
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                >
+                    <Box width={330}>
+                        <Grid container columnSpacing={1.5}>
+                            <Grid item xs={6}>
+                                <AnatomyHome />
                             </Grid>
-                            <Grid item>
-                                <OvaryHome />
+                            <Grid item xs={6}>
+                                <Grid
+                                    container
+                                    direction="column"
+                                    rowSpacing={2}
+                                >
+                                    <Grid item>
+                                        <HeartHome />
+                                    </Grid>
+                                    <Grid item>
+                                        <OvaryHome />
+                                    </Grid>
+                                </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
-                </Grid>
-                <Box my={7}>
-                    <PosterHome />
+                    </Box>
+                    <Box width={330}>
+                        <Box my={7}>
+                            <PosterHome />
+                        </Box>
+                    </Box>
                 </Box>
-                <Grid container my={7} spacing={1}>
-                    <Grid item xs={4}>
-                        <SkullHome />
+                <Container maxWidth="xs">
+                    <Grid container my={7} spacing={1}>
+                        <Grid item xs={4}>
+                            <SkullHome />
+                        </Grid>
+                        <Grid item xs={4}>
+                            <SkinHome />
+                        </Grid>
+                        <Grid item xs={4}>
+                            <PregnancyHome />
+                        </Grid>
                     </Grid>
-                    <Grid item xs={4}>
-                        <SkinHome />
-                    </Grid>
-                    <Grid item xs={4}>
-                        <PregnancyHome />
-                    </Grid>
-                </Grid>
-                <Grid container spacing={2} mb={7}>
-                    <Grid item xs={6}>
-                        <CervicalHome />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <BreastHome />
-                    </Grid>
-                </Grid>
-            </Container>
 
+                    <Grid container spacing={2} mb={7}>
+                        <Grid item xs={6}>
+                            <CervicalHome />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <BreastHome />
+                        </Grid>
+                    </Grid>
+                </Container>
+            </Container>
+        </section>,
+    ];
+
+    // Shuffle the sections randomly
+    const shuffledSections = shuffleArray(sections);
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+    return (
+        <UserLayout>
+            <Head title="Home" />
+            {shuffledSections.map((section, index) => (
+                <React.Fragment key={index}>{section}</React.Fragment>
+            ))}
             <Footer />
         </UserLayout>
     );

@@ -68,8 +68,8 @@ export default function AdminBar(props) {
                     mb: 2,
                 }}
             >
+                {heading !== "Dashboard" && <BackButton />}
                 <Typography fontSize={22} fontWeight={700} zIndex={1}>
-                    {heading !== "Dashboard" && <BackButton />}
                     {heading}
                 </Typography>
 
@@ -110,7 +110,17 @@ export default function AdminBar(props) {
                             <List>
                                 {MenuList.map((Menu) => (
                                     <ListItem key={Menu.Title}>
-                                        <Box
+                                        <Typography
+                                            color={
+                                                route().current(Menu.Link)
+                                                    ? "white"
+                                                    : "black"
+                                            }
+                                            bgcolor={
+                                                route().current(Menu.Link)
+                                                    ? "orange"
+                                                    : "#dedede"
+                                            }
                                             sx={{
                                                 width: 140,
                                                 p: 2,
@@ -118,25 +128,12 @@ export default function AdminBar(props) {
                                                 borderRadius: 3,
                                                 cursor: "pointer",
                                             }}
-                                            bgcolor={
-                                                route().current(Menu.Link)
-                                                    ? "orange"
-                                                    : "#dedede"
-                                            }
                                             onClick={() => {
                                                 router.get(route(Menu.Link));
                                             }}
                                         >
-                                            <Typography
-                                                color={
-                                                    route().current(Menu.Link)
-                                                        ? "white"
-                                                        : "black"
-                                                }
-                                            >
-                                                {Menu.Title}
-                                            </Typography>
-                                        </Box>
+                                            {Menu.Title}
+                                        </Typography>
                                     </ListItem>
                                 ))}
                                 <ListItem>

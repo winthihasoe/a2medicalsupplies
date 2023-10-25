@@ -125,7 +125,7 @@ export default function AppBar() {
                                             }}
                                             bgcolor={
                                                 route().current(Menu.Link)
-                                                    ? "orange"
+                                                    ? "#db883b"
                                                     : "#efefef"
                                             }
                                             onClick={() =>

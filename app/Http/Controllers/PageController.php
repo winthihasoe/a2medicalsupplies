@@ -24,7 +24,7 @@ class PageController extends Controller
             $count = 0;
 
             // Calculate the number of matches in each property
-            $properties = ['res_name', 'menu_name', 'cat_name', 'name'];
+            $properties = ['category_name', 'product_name'];
             foreach ($properties as $property) {
                 $count += substr_count(strtolower($result->{$property}), strtolower($keywords));
             }
@@ -38,7 +38,7 @@ class PageController extends Controller
         return $scoredResults->sortByDesc('relevance_score')->values();
     }
 
-    // Search shops and restaurants
+    // Search products and categories
     public function searchEverything(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -52,15 +52,24 @@ class PageController extends Controller
         $keywords = $request->keywords;
 
         $products = Product::where('product_name', 'LIKE', '%' . $keywords . '%')->get();
-        // $drugs = Drug::where('drug_name', 'LIKE', '%' . $keywords . '%')->select('id', 'drug_name', 'retail_price')->get();
-        
+        $categories = Category::where('category_name', 'LIKE', '%' . $keywords . '%')->get();
+
         // Merge all the results into one collection
-        $results = $products;
+        $results = $products->concat($categories);
 
         // Calculate and sort the results based on the relevance score
         $sortedResults = $this->calculateRelevanceScore($results, $keywords);
 
         return Inertia::render('SearchResult', ['results' => $sortedResults, 'keywords' => $keywords]);
+    }
+
+    // from search result, showing product list from category
+    public function productList($categoryName)
+    {
+        $productList = Product::where('category', 'LIKE', '%'.$categoryName.'%')->get();
+        return Inertia::render('ProductList', [
+            'products' => $productList,
+        ]);
     }
 
     // Show login Form 

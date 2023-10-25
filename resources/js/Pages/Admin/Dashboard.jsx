@@ -66,6 +66,7 @@ export default function Dashboard({ stockList }) {
                                     route("adminSingleProduct", stock.id)
                                 )
                             }
+                            key={stock.id}
                         >
                             <Typography fontWeight={600}>
                                 {stock.product_name}
@@ -74,8 +75,8 @@ export default function Dashboard({ stockList }) {
                         </Box>
                     ))}
                 </Box>
-                {DashboardMenu.map((Menu) => (
-                    <Box>
+                {DashboardMenu.map((Menu, index) => (
+                    <Box key={index}>
                         <Box
                             sx={{
                                 display: "flex",

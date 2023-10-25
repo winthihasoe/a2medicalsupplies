@@ -5,9 +5,6 @@ import React from "react";
 export default function PosterHome() {
     return (
         <Box>
-            <Typography fontSize={15} gutterBottom>
-                -- Medical Posters --
-            </Typography>
             <Box
                 sx={{
                     display: "flex",
@@ -25,6 +22,9 @@ export default function PosterHome() {
                 <img src="/images/products/poster2.jpg" alt="" height="100%" />
                 <img src="/images/products/poster3.jpg" alt="" height="100%" />
             </Box>
+            <Typography fontSize={15} mt={2} gutterBottom align="center">
+                -- Medical Posters --
+            </Typography>
         </Box>
     );
 }

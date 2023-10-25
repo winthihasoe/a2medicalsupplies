@@ -1,6 +1,7 @@
 import NumberWithComma from "@/components/NumberWithComma";
 import AccountLayout from "@/layouts/AccountLayout";
-import { Head, useForm, usePage } from "@inertiajs/react";
+
+import { Head, router, useForm, usePage } from "@inertiajs/react";
 import {
     Box,
     Button,
@@ -25,7 +26,6 @@ export default function SingleProduct(props) {
         e.preventDefault();
         post(route("addToCart"), data);
     };
-    console.log(product);
     return (
         <AccountLayout>
             <Head title={product.product_name} />
@@ -115,8 +115,12 @@ export default function SingleProduct(props) {
                         margin: "0 auto",
                     }}
                 >
-                    <Button variant="outlined" fullWidth>
-                        Quotation
+                    <Button
+                        variant="outlined"
+                        fullWidth
+                        onClick={() => router.visit(route("home"))}
+                    >
+                        Go back Home
                     </Button>
                     <Button
                         variant="contained"

@@ -119,7 +119,7 @@ class OrderController extends Controller
     // Show order history to admin
     public function adminOrders()
     {
-        $orders = Order::with('user')->paginate(10);
+        $orders = Order::with('user')->with('orderItems.product')->paginate(10);
         return Inertia::render('Admin/AdminOrders', [
             'orders' => $orders
         ]);

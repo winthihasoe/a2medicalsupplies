@@ -17,6 +17,7 @@ Route::get('/', [PageController::class, 'index'])->name('home');
 
 // Search everything in UserLayout
 Route::get('/search-products-drugs', [PageController::class, 'searchEverything'])->name('searchEverything');
+Route::get('/search-result/{categoryName}', [PageController::class, 'productList'])->name('productList');
 
 Route::get('/manikins', [PageController::class, 'manikins'])->name('manikins');
 Route::get('/cpr', [PageController::class, 'cpr'])->name('cpr');
@@ -41,10 +42,10 @@ Route::get('/suture-kit', [PageController::class, 'suture'])->name('suture');
 Route::get('/dressing-box', [PageController::class, 'dressing'])->name('dressing');
 Route::get('/surgical-marker-pen', [PageController::class, 'pen'])->name('pen');
 
-// Show single product for user
-Route::get('/single-product/{productId}', [ProductController::class, 'singleProduct'])->name('singleProduct');
-
 Route::middleware(['auth'])->group(function () {
+    // Show single product for user
+    Route::get('/single-product/{productId}', [ProductController::class, 'singleProduct'])->name('singleProduct');
+    
     Route::post('/cart', [CartController::class, 'addToCart'])->name('addToCart');
     Route::get('/cart', [CartController::class, 'showCart'])->name('showCart');
     Route::put('/cart/{cartId}', [CartController::class, 'changeCartQty'])->name('changeCartQty');

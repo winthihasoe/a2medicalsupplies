@@ -1,6 +1,6 @@
 import React from "react";
 import AdminLayout from "../../layouts/AdminLayout";
-import { Box, Container, Pagination, Typography } from "@mui/material";
+import { Box, Container, Divider, Pagination, Typography } from "@mui/material";
 import { useState } from "react";
 import { Head, Link, router } from "@inertiajs/react";
 
@@ -10,6 +10,16 @@ export default function AdminOrders({ orders }) {
         setCurrentPage(page);
         router.get(`order-history?page=${page}`);
     };
+
+    const formatDate = (dateString) => {
+        const options = {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+        };
+        return new Date(dateString).toLocaleDateString(undefined, options);
+    };
+    console.log(orders);
     return (
         <AdminLayout heading={"Order History"}>
             <Head title="Order History" />
@@ -26,26 +36,56 @@ export default function AdminOrders({ orders }) {
                     {orders.data.map((order) => (
                         <Box
                             sx={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                                alignItems: "center",
                                 p: 2,
                                 my: 2,
                                 backgroundColor: "#efefef",
                                 borderRadius: 4,
+                                cursor: "pointer",
                             }}
+                            onClick={() =>
+                                router.visit(
+                                    route("adminSingleOrder", order.id)
+                                )
+                            }
+                            key={order.id}
                         >
-                            <Link
-                                className="inertia-link"
-                                href={route("adminSingleOrder", order.id)}
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    alignItems: "center",
+                                }}
                             >
-                                <Typography fontSize={14}>
+                                <Typography fontSize={10}>
+                                    {formatDate(order.created_at)}
+                                </Typography>
+                                <Box>
+                                    <Link
+                                        href={route(
+                                            "adminSingleOrder",
+                                            order.id
+                                        )}
+                                    >
+                                        {order.status}
+                                    </Link>
+                                </Box>
+                            </Box>
+                            <Divider />
+
+                            <Box>
+                                <Typography fontSize={14} fontWeight={600}>
                                     {order.user.name}
                                 </Typography>
-                            </Link>
-                            <Link href={route("adminSingleOrder", order.id)}>
-                                {order.status}
-                            </Link>
+                                {order.order_items.map((item, index) => (
+                                    <Typography
+                                        fontSize={10}
+                                        display="inline-block"
+                                        key={index}
+                                    >
+                                        {item.product.product_name},
+                                    </Typography>
+                                ))}
+                            </Box>
                         </Box>
                     ))}
                     {orders.data.length == 0 ? (
