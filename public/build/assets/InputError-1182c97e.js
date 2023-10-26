@@ -1,1 +1,0 @@
-import{j as t}from"./app-bfca789f.js";import{T as n}from"./Typography-167ed09c.js";function a({message:r,className:p="",...o}){return r?t.jsx(n,{fontSize:12,...o,color:"error",children:r}):null}export{a as I};

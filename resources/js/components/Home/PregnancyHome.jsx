@@ -7,8 +7,8 @@ export default function PregnancyHome() {
         <Box sx={{ cursor: "pointer" }} onClick={() => router.get("pregnancy")}>
             <Box
                 sx={{
-                    width: { xs: 100, sm: 110, md: 120 },
-                    height: { xs: 100, sm: 110, md: 120 },
+                    width: { xs: 90, sm: 100, md: 120 },
+                    height: { xs: 90, sm: 100, md: 120 },
                     borderRadius: "50%",
                     backgroundColor: "#f6eded",
                     border: "2px solid orange",
@@ -21,7 +21,7 @@ export default function PregnancyHome() {
             >
                 <img src="/images/products/pregnancy.jpg" height="100%" />
             </Box>
-            <Typography variant="subtitle1" align="center">
+            <Typography fontSize={12} align="center">
                 Pregnancy Model
             </Typography>
         </Box>

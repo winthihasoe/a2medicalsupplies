@@ -23,7 +23,7 @@ export default function Footer() {
                 <Typography fontWeight={500} fontSize={12}>
                     Copyright@2023
                 </Typography>
-                <Typography color="primary" fontWeight={700} fontSize={15}>
+                <Typography color="primary" fontWeight={700} fontSize={14}>
                     A2 Medical supply
                 </Typography>
             </Box>

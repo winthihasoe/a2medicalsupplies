@@ -27,8 +27,8 @@ export default function OvaryHome() {
                     p: 1,
                 }}
             >
-                <Typography fontSize={14} fontWeight={600} align="center">
-                    Uterus & Ovary model
+                <Typography fontSize={13} fontWeight={600} align="center">
+                    Uterus Ovary model
                 </Typography>
             </Box>
             <Box>

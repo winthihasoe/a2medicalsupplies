@@ -6,7 +6,7 @@ export default function SkeletonHome() {
     return (
         <Box
             sx={{
-                width: 174,
+                width: "100%",
                 height: 109,
                 flexShrink: 0,
                 border: "1px solid #d2d2d2",
@@ -26,7 +26,7 @@ export default function SkeletonHome() {
                     alignItems: "center",
                 }}
             >
-                <Typography fontSize={16} fontWeight={600}>
+                <Typography fontSize={14} fontWeight={600}>
                     Skeleton
                 </Typography>
             </Box>

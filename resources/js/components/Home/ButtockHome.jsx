@@ -36,7 +36,7 @@ export default function ButtockHome() {
                     alignItems: "center",
                 }}
             >
-                <Typography fontSize={14} fontWeight={600} align="center">
+                <Typography fontSize={13} fontWeight={600} align="center">
                     Buttock IM practice model
                 </Typography>
             </Box>

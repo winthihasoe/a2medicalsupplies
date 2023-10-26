@@ -55,11 +55,11 @@ export default function Home() {
                 }}
             >
                 <Box>
-                    <Grid container columnSpacing={1.5}>
-                        <Grid item>
+                    <Grid container columnSpacing={2}>
+                        <Grid item xs={6}>
                             <ManikinHome />
                         </Grid>
-                        <Grid item>
+                        <Grid item xs={6}>
                             <Grid container direction="column" rowSpacing={2}>
                                 <Grid item>
                                     <CPRHome />
@@ -161,7 +161,12 @@ export default function Home() {
                     }}
                 >
                     <Box>
-                        <Grid container spacing={2}>
+                        <Grid
+                            container
+                            spacing={2}
+                            display="flex"
+                            justifyContent="center"
+                        >
                             <Grid item xs={6}>
                                 <ButtockHome />
                             </Grid>
@@ -184,7 +189,7 @@ export default function Home() {
                     }}
                 >
                     <EtTubeHome />
-                    <Box sx={{ width: { xs: "70%", sm: "50%", md: "30%" } }}>
+                    <Box sx={{ width: { xs: "90%", sm: "50%", md: "30%" } }}>
                         <Typography fontSize={22} fontWeight={400} gutterBottom>
                             Realistic Simulations
                         </Typography>
@@ -225,12 +230,12 @@ export default function Home() {
                         spacing={3}
                         px={{ xs: 0, sm: 0, md: 7 }}
                     >
-                        <Grid item xs={12} md={5}>
+                        <Grid item xs={10} md={5}>
                             <Box>
                                 <BloodCollectionNeedleHome />
                             </Box>
                         </Grid>
-                        <Grid item xs={12} md={5}>
+                        <Grid item xs={10} md={5}>
                             <Box>
                                 <SurgicalPenHome />
                             </Box>
@@ -294,24 +299,26 @@ export default function Home() {
                             </Grid>
                         </Grid>
                     </Box>
-                    <Box width={330}>
-                        <Box my={7}>
+                    <Box width={290}>
+                        <Box my={5}>
                             <PosterHome />
                         </Box>
                     </Box>
                 </Box>
                 <Container maxWidth="xs">
-                    <Grid container my={7} spacing={1}>
-                        <Grid item xs={4}>
-                            <SkullHome />
-                        </Grid>
-                        <Grid item xs={4}>
-                            <SkinHome />
-                        </Grid>
-                        <Grid item xs={4}>
-                            <PregnancyHome />
-                        </Grid>
-                    </Grid>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexWrap: "warp",
+                            gap: 2,
+                            justifyContent: "center",
+                            my: 5,
+                        }}
+                    >
+                        <SkullHome />
+                        <SkinHome />
+                        <PregnancyHome />
+                    </Box>
 
                     <Grid container spacing={2} mb={7}>
                         <Grid item xs={6}>

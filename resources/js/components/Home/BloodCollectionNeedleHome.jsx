@@ -26,7 +26,7 @@ export default function BloodCollectionNeedleHome() {
                     width="50%"
                     p={2}
                 >
-                    <Typography fontSize={18} align="right" fontWeight={600}>
+                    <Typography fontSize={16} align="right" fontWeight={600}>
                         Blood Collection Needles
                     </Typography>
                 </Box>

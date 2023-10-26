@@ -6,7 +6,7 @@ export default function EtTubeHome() {
     return (
         <Box
             sx={{
-                width: 348,
+                width: 290,
                 height: 150,
                 flexShrink: 0,
                 display: "flex",
@@ -23,6 +23,7 @@ export default function EtTubeHome() {
             <Box
                 sx={{
                     overflow: "hidden",
+                    width: "60%",
                 }}
             >
                 <img

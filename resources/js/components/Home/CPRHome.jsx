@@ -6,7 +6,7 @@ export default function CPRHome() {
     return (
         <Box
             sx={{
-                width: 174,
+                width: "100%",
                 height: 109,
                 flexShrink: 0,
                 border: "1px solid #d2d2d2",

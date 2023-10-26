@@ -6,7 +6,7 @@ export default function InjectionArm() {
     return (
         <Box
             sx={{
-                width: 348,
+                width: 290,
                 height: 150,
                 flexShrink: 0,
                 display: "flex",
@@ -23,6 +23,7 @@ export default function InjectionArm() {
             <Box
                 sx={{
                     overflow: "hidden",
+                    width: "50%",
                 }}
             >
                 <img
@@ -39,9 +40,8 @@ export default function InjectionArm() {
                 justifyContent="center"
                 alignItems="center"
                 width="50%"
-                p={2}
             >
-                <Typography fontSize={22} fontWeight={600}>
+                <Typography fontSize={20} p={2} fontWeight={600}>
                     Arm IV practice model
                 </Typography>
             </Box>

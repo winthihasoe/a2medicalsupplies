@@ -21,14 +21,14 @@ export default function AnatomyHome() {
         >
             <Box
                 sx={{
-                    height: "20%",
+                    height: "30%",
                     width: "100%",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                 }}
             >
-                <Typography fontSize={16} fontWeight={700} align="center">
+                <Typography fontSize={15} fontWeight={700} align="center">
                     Anatomy Torso
                 </Typography>
             </Box>

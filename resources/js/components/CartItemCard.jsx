@@ -39,7 +39,7 @@ export default function CartItemCard(props) {
             <Box
                 sx={{
                     p: 1,
-                    borderRadius: 2,
+
                     my: 2,
                     borderRadius: 5,
                     border: "1px solid #dedede",

@@ -20,17 +20,17 @@ export default function BreastHome() {
         >
             <Box
                 sx={{
-                    width: "80%",
+                    width: "50%",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
                 }}
             >
-                <Typography fontSize={16} fontWeight={600} p={1} align="center">
+                <Typography fontSize={13} fontWeight={600} p={1} align="center">
                     Breast Model
                 </Typography>
             </Box>
-            <Box>
+            <Box sx={{ width: "50%" }}>
                 <img
                     src="/images/products/breast.jpg"
                     alt=""

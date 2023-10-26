@@ -20,17 +20,17 @@ export default function CervicalHome() {
         >
             <Box
                 sx={{
-                    width: "80%",
+                    width: "50%",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
                 }}
             >
-                <Typography fontSize={16} fontWeight={600} p={1} align="center">
+                <Typography fontSize={12} fontWeight={600} p={1} align="center">
                     Cervical vertebra Model
                 </Typography>
             </Box>
-            <Box>
+            <Box sx={{ width: "50%" }}>
                 <img
                     src="/images/products/cervical.jpg"
                     alt=""

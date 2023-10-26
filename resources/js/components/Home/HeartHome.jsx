@@ -26,7 +26,7 @@ export default function HeartHome() {
                     alignItems: "center",
                 }}
             >
-                <Typography fontSize={16} fontWeight={600} p={1} align="center">
+                <Typography fontSize={14} fontWeight={600} p={1} align="center">
                     Heart Model
                 </Typography>
             </Box>

@@ -26,7 +26,7 @@ export default function SurgicalPenHome() {
                 alignItems="center"
                 width="70%"
             >
-                <Typography fontSize={18} p={2} align="center" fontWeight={600}>
+                <Typography fontSize={16} p={2} align="center" fontWeight={600}>
                     Surgical Marker Pen & Eraser
                 </Typography>
             </Box>

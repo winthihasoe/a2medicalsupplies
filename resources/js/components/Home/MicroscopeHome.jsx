@@ -6,7 +6,7 @@ export default function MicroscopeHome() {
     return (
         <Box
             sx={{
-                width: 348,
+                width: 290,
                 height: 150,
                 flexShrink: 0,
                 display: "flex",

@@ -24,10 +24,14 @@ export default function SearchBar() {
         }
     };
     return (
-        <Box sx={{ my: 2, width: 350, margin: "0 auto" }}>
+        <Box sx={{ my: 2, width: 290, margin: "0 auto" }}>
             <TextField
                 fullWidth
-                placeholder={categories[0][random].category_name + " ..."}
+                placeholder={
+                    categories[0] == ""
+                        ? "Search..."
+                        : categories[0][random]?.category_name + " ..."
+                }
                 size="small"
                 InputProps={{
                     endAdornment: (
