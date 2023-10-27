@@ -1,0 +1,1 @@
+import{j as o}from"./app-eb81fd5d.js";import{A as t}from"./AppBar-f1bdfca8.js";import{F as i}from"./FlashMessage-afa137b7.js";import{B as s}from"./Box-7ada19ab.js";function e({children:r}){return o.jsxs(s,{sx:{display:"flex",flexDirection:"column",minHeight:"100vh"},children:[o.jsx(i,{}),o.jsx(t,{}),o.jsx(s,{component:"main",maxWidth:"xs",children:r})]})}export{e as A};
