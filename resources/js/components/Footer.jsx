@@ -20,10 +20,10 @@ export default function Footer() {
                     alignItems: "flex-end",
                 }}
             >
-                <Typography fontWeight={500} fontSize={12}>
+                <Typography fontWeight={500} fontSize={10}>
                     Copyright@2023
                 </Typography>
-                <Typography color="primary" fontWeight={700} fontSize={14}>
+                <Typography color="primary" fontWeight={700} fontSize={12}>
                     A2 Medical supply
                 </Typography>
             </Box>

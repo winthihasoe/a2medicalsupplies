@@ -21,7 +21,7 @@ class DrugController extends Controller
     // Show add drug form
     public function add()
     {
-        return Inertia::render('AddDrug');
+        return Inertia::render('Admin/Drugs/AddDrug');
     }
 
     // Store new drug
@@ -33,7 +33,7 @@ class DrugController extends Controller
             'retail_price'=>'required'
         ]);
         Drug::create($request->all());
-        return redirect('/')->with('message', 'Drug was updated!');
+        return redirect(route('allDrugs'))->with('success', 'Drug was added!');
 
     }
 

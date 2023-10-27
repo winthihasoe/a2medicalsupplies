@@ -14,7 +14,6 @@ import React from "react";
 import { Head, Link, router } from "@inertiajs/react";
 
 export default function SearchResult({ results, keywords }) {
-    console.log(results);
     return (
         <UserLayout>
             <Head title={keywords + " results"} />

@@ -6,8 +6,8 @@ export default function ManikinHome() {
     return (
         <Box
             sx={{
-                width: "100%",
-                height: 239,
+                width: 150,
+                height: 220,
                 flexShrink: 0,
                 border: "1px solid #d2d2d2",
                 borderRadius: 5,

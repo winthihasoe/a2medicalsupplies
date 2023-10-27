@@ -87,7 +87,7 @@ export default function UserDetail({ user }) {
 
                 {isEditing && (
                     <form onSubmit={handleSubmit}>
-                        <FormControl sx={{ mt: 1, mb: 2, minWidth: 250 }}>
+                        <FormControl sx={{ mt: 1, mb: 2, minWidth: 150 }}>
                             {/* --- Change to Admin --- */}
                             <label id="admin">Change to admin?</label>
                             <Select
@@ -102,7 +102,7 @@ export default function UserDetail({ user }) {
                                 <MenuItem value={0}>No</MenuItem>
                             </Select>
                         </FormControl>
-                        <FormControl sx={{ mt: 1, mb: 2, minWidth: 250 }}>
+                        <FormControl sx={{ mt: 1, mb: 2, minWidth: 150 }}>
                             {/* --- Change to Editor --- */}
                             <label id="editor">Change to editor?</label>
                             <Select

@@ -97,7 +97,7 @@ export default function AddProduct(props) {
                 <Box
                     sx={{
                         height: 200,
-                        width: 320,
+                        width: 280,
                         margin: "10px auto",
                         backgroundColor: "#dedede",
                         borderRadius: 5,

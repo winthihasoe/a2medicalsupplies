@@ -138,6 +138,18 @@ export default function AdminEditDrug({ drug }) {
                     Update
                 </Button>
                 <Button
+                    onClick={() =>
+                        router.visit(route("adminSingleDrug", drug.id))
+                    }
+                    fullWidth
+                    size="small"
+                    variant="outlined"
+                >
+                    Cancel
+                </Button>
+            </Box>
+            <Box px={3}>
+                <Button
                     fullWidth
                     size="small"
                     variant="contained"

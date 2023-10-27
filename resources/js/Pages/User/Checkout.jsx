@@ -76,7 +76,6 @@ export default function Checkout(props) {
             post(route("placeOrder"), data);
         }
     };
-    console.log(data);
 
     return (
         <UserLayout>

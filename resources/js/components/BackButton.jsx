@@ -8,7 +8,7 @@ export default function BackButton() {
         window.history.back();
     };
     return (
-        <Box display="inline-block" mr={2}>
+        <Box display="inline-block" mr={2} zIndex={1000}>
             <IconButton onClick={handleGoBack}>
                 <ArrowCircleLeftOutlinedIcon />
             </IconButton>

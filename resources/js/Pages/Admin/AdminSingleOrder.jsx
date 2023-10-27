@@ -199,7 +199,7 @@ export default function AdminSingleOrder({ order }) {
                     display: "flex",
                     gap: 1,
                     alignItems: "center",
-                    width: 300,
+                    width: 280,
                 }}
             >
                 <Box>

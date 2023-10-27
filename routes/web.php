@@ -97,8 +97,8 @@ Route::prefix('admin')->middleware(['isEditor'])->group(function() {
 
     //Pharmacy
     Route::get('drugs', [DrugController::class, 'index'])->name('allDrugs');
-    Route::get('add-drug', [DrugController::class, 'add']);
-    Route::post('add-drug', [DrugController::class, 'store']);
+    Route::get('add-drug', [DrugController::class, 'add'])->name('addDrug');
+    Route::post('add-drug', [DrugController::class, 'store'])->name('storeDrug');
     Route::get('{drugId}', [DrugController::class, 'show'])->name('adminSingleDrug');
     Route::get('drug/{drugId}', [DrugController::class, 'edit'])->name('editDrug');
     Route::put('drug/update/{drugId}', [DrugController::class, 'update'])->name('updateDrug');

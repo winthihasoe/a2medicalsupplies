@@ -33,7 +33,7 @@ export default function Login({ status, canResetPassword }) {
     };
 
     return (
-        <Container>
+        <Container maxWidth="xs">
             <Head title="Login" />
             <Box align="center" my={3}>
                 <ApplicationLogo />
@@ -41,7 +41,6 @@ export default function Login({ status, canResetPassword }) {
             <form onSubmit={submit}>
                 <Box
                     sx={{
-                        width: 280,
                         margin: "2px auto",
                         border: "2px solid #cdcdcd",
                         borderRadius: 5,
@@ -93,7 +92,7 @@ export default function Login({ status, canResetPassword }) {
                     </Box>
                     <Typography fontSize={14}>
                         Don't have an account?{" "}
-                        <Link href={route("register")}>Create one</Link>
+                        <Link href={route("register")}>Create new account</Link>
                     </Typography>
                     <Box px={6} mb={3}>
                         <Button

@@ -54,7 +54,12 @@ export default function AppBar() {
                     mb: 2,
                 }}
             >
-                <Typography color="primary" fontSize={22} fontWeight={700}>
+                <Typography
+                    color="primary"
+                    zIndex={1000}
+                    fontSize={22}
+                    fontWeight={700}
+                >
                     <Link className="inertia-link" href={route("home")}>
                         A2 Medical Supplies
                     </Link>

@@ -25,8 +25,9 @@ export default function MicroscopeHome() {
                 justifyContent="center"
                 alignItems="center"
                 width="70%"
+                p={2}
             >
-                <Typography fontSize={22} fontWeight={600}>
+                <Typography fontSize={18} fontWeight={600}>
                     Microscope
                 </Typography>
             </Box>

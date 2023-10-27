@@ -7,7 +7,7 @@ export default function CervicalHome() {
         <Box
             sx={{
                 width: "100%",
-                height: 109,
+                height: 110,
                 flexShrink: 0,
                 border: "1px solid #d2d2d2",
                 borderRadius: 5,
@@ -24,6 +24,7 @@ export default function CervicalHome() {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
+                    p: 1,
                 }}
             >
                 <Typography fontSize={12} fontWeight={600} p={1} align="center">

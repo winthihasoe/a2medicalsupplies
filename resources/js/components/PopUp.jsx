@@ -18,7 +18,7 @@ export default function PopUp({ children, open, setOpen }) {
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        width: 300,
+        width: 260,
         bgcolor: "background.paper",
         borderRadius: 3,
         boxShadow: 24,

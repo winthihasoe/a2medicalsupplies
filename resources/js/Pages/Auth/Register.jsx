@@ -26,110 +26,118 @@ export default function Register() {
     };
 
     return (
-        <Container>
+        <Container maxWidth="xs">
             <Head title="Register" />
             <Box align="center" my={3}>
                 <ApplicationLogo />
             </Box>
-            <Box
-                sx={{
-                    width: 280,
-                    margin: "2px auto",
-                    border: "2px solid #cdcdcd",
-                    borderRadius: 5,
-                    py: 2,
-                    px: 4,
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 3,
-                    my: 4,
-                }}
-            >
-                <Typography
-                    align="center"
-                    mb={2}
-                    fontSize={22}
-                    fontWeight={400}
+            <form onSubmit={submit}>
+                <Box
+                    sx={{
+                        margin: "2px auto",
+                        border: "2px solid #cdcdcd",
+                        borderRadius: 5,
+                        py: 2,
+                        px: 4,
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 3,
+                        my: 4,
+                    }}
                 >
-                    Register
-                </Typography>
-                <Box>
-                    <Typography>name:</Typography>
-                    <TextField
-                        onChange={(e) => setData("name", e.target.value)}
-                        name="name"
-                        size="small"
-                        type="text"
-                        fullWidth
-                        value={data.name}
-                    />
-                    <InputError message={errors.name} />
-                </Box>
-                <Box>
-                    <Typography>Email:</Typography>
-                    <TextField
-                        onChange={(e) => setData("email", e.target.value)}
-                        name="email"
-                        type="email"
-                        size="small"
-                        fullWidth
-                        value={data.email}
-                    />
-                    <InputError message={errors.email} />
-                </Box>
-                <Box>
-                    <Typography>Phone:</Typography>
-                    <TextField
-                        onChange={(e) => setData("phone", e.target.value)}
-                        name="phone"
-                        type="number"
-                        size="small"
-                        fullWidth
-                        value={data.phone}
-                    />
-                    <InputError message={errors.phone} />
-                </Box>
-                <Box>
-                    <Typography>Passowrd:</Typography>
-                    <TextField
-                        onChange={(e) => setData("password", e.target.value)}
-                        name="password"
-                        type="password"
-                        size="small"
-                        fullWidth
-                        value={data.password}
-                    />
-                    <InputError message={errors.password} />
-                </Box>
-                <Box>
-                    <Typography>Confirm Passowrd:</Typography>
-                    <TextField
-                        onChange={(e) =>
-                            setData("password_confirmation", e.target.value)
-                        }
-                        name="confirm_password"
-                        type="password"
-                        size="small"
-                        fullWidth
-                    />
-                    <InputError message={errors.password_confirmation} />
-                </Box>
-                <Typography fontSize={14}>
-                    Already have an account?{" "}
-                    <Link href={route("login")}>Login!</Link>
-                </Typography>
-                <Box px={6} mb={3}>
-                    <Button
-                        size="small"
-                        fullWidth
-                        variant="contained"
-                        onClick={submit}
-                        disabled={processing}
+                    <Typography
+                        align="center"
+                        mb={2}
+                        fontSize={22}
+                        fontWeight={400}
                     >
                         Register
-                    </Button>
+                    </Typography>
+                    <Box>
+                        <Typography>name:</Typography>
+                        <TextField
+                            onChange={(e) => setData("name", e.target.value)}
+                            name="name"
+                            size="small"
+                            type="text"
+                            fullWidth
+                            value={data.name}
+                            required
+                        />
+                        <InputError message={errors.name} />
+                    </Box>
+                    <Box>
+                        <Typography>Email:</Typography>
+                        <TextField
+                            onChange={(e) => setData("email", e.target.value)}
+                            name="email"
+                            type="email"
+                            size="small"
+                            fullWidth
+                            value={data.email}
+                            required
+                        />
+                        <InputError message={errors.email} />
+                    </Box>
+                    <Box>
+                        <Typography>Phone:</Typography>
+                        <TextField
+                            onChange={(e) => setData("phone", e.target.value)}
+                            name="phone"
+                            type="number"
+                            size="small"
+                            fullWidth
+                            value={data.phone}
+                            required
+                        />
+                        <InputError message={errors.phone} />
+                    </Box>
+                    <Box>
+                        <Typography>Passowrd:</Typography>
+                        <TextField
+                            onChange={(e) =>
+                                setData("password", e.target.value)
+                            }
+                            name="password"
+                            type="password"
+                            size="small"
+                            fullWidth
+                            value={data.password}
+                            required
+                        />
+                        <InputError message={errors.password} />
+                    </Box>
+                    <Box>
+                        <Typography>Confirm Passowrd:</Typography>
+                        <TextField
+                            onChange={(e) =>
+                                setData("password_confirmation", e.target.value)
+                            }
+                            name="confirm_password"
+                            type="password"
+                            size="small"
+                            fullWidth
+                            required
+                        />
+                        <InputError message={errors.password_confirmation} />
+                    </Box>
+                    <Typography fontSize={14}>
+                        Already have an account?{" "}
+                        <Link href={route("login")}>Login!</Link>
+                    </Typography>
+                    <Box px={6} mb={3}>
+                        <Button
+                            size="small"
+                            fullWidth
+                            variant="contained"
+                            type="submit"
+                            disabled={processing}
+                        >
+                            Register
+                        </Button>
+                    </Box>
                 </Box>
-            </Box>
+            </form>
         </Container>
     );
 }

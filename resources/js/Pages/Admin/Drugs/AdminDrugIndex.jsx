@@ -1,7 +1,7 @@
 import NumberWithComma from "@/components/NumberWithComma";
 import AdminLayout from "@/layouts/AdminLayout";
 import { Head, router } from "@inertiajs/react";
-import { Box, Container, TextField, Typography } from "@mui/material";
+import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import React from "react";
 import { useState } from "react";
 
@@ -10,6 +10,14 @@ export default function AdminDrugIndex({ drugs }) {
     return (
         <AdminLayout heading={"All Drugs"}>
             <Head title="Drugs" />
+            <Box align="right" mx={3}>
+                <Button
+                    onClick={() => router.get(route("addDrug"))}
+                    variant="outlined"
+                >
+                    Add Drug
+                </Button>
+            </Box>
             {/* Search drug input field  */}
             <Box
                 sx={{

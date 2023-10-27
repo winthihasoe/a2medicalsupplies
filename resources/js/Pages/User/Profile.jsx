@@ -29,7 +29,6 @@ export default function Profile(props) {
         e.preventDefault();
         post(route("updateUser", user.id), data);
     };
-    console.log(errors);
 
     return (
         <AccountLayout>

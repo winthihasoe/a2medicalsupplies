@@ -230,12 +230,12 @@ export default function Home() {
                         spacing={3}
                         px={{ xs: 0, sm: 0, md: 7 }}
                     >
-                        <Grid item xs={10} md={5}>
+                        <Grid item xs={10} sm={6} md={5}>
                             <Box>
                                 <BloodCollectionNeedleHome />
                             </Box>
                         </Grid>
-                        <Grid item xs={10} md={5}>
+                        <Grid item xs={10} sm={6} md={5}>
                             <Box>
                                 <SurgicalPenHome />
                             </Box>

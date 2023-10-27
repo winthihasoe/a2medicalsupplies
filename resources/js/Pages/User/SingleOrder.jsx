@@ -244,7 +244,7 @@ export default function SingleOrder(props) {
                         display: "flex",
                         gap: 1,
                         alignItems: "center",
-                        width: "100%",
+                        width: "90%",
                     }}
                 >
                     <Box width="25%" display="flex" justifyContent="center">
