@@ -144,7 +144,12 @@ export default function AdminEditDrug() {
                     >
                         Save
                     </Button>
-                    <Button fullWidth size="small" variant="outlined">
+                    <Button
+                        onClick={() => router.visit(route("allDrugs"))}
+                        fullWidth
+                        size="small"
+                        variant="outlined"
+                    >
                         Cancel
                     </Button>
                 </Box>
